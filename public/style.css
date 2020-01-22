@@ -44,3 +44,12 @@ main {
     display: flex;
     flex-direction: column-reverse;
 }
+
+/*login*/
+.login-logout {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: -70px;
+    height: 1.8%;
+    width: 1.8%;
+}
