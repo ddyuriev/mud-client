@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8340829e-8a63-41c7-b578-381afb2ddd95" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.html" beforeDir="false" afterPath="$PROJECT_DIR$/client.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8">
-              <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+            <state>
+              <caret column="9" selection-start-column="2" selection-end-column="9" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -26,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="27" />
+            <state relative-caret-position="408">
+              <caret line="60" selection-start-line="60" selection-end-line="62" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -44,16 +43,30 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/jquery/jquery-3.4.1.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>second-row</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,13 +75,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/client.html" />
-        <option value="$PROJECT_DIR$/public/main.js" />
         <option value="$PROJECT_DIR$/public/style.css" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/public/main.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-93" />
     <option name="width" value="1694" />
     <option name="height" value="1066" />
@@ -130,12 +143,12 @@
       <workItem from="1577445266049" duration="13614000" />
       <workItem from="1577790691490" duration="1804000" />
       <workItem from="1579704925833" duration="6000" />
-      <workItem from="1579705028661" duration="628000" />
+      <workItem from="1579705028661" duration="16539000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26481000" />
+    <option name="totallyTimeSpent" value="42392000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -166,23 +179,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
-          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
@@ -192,8 +188,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" selection-start-column="2" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/jquery/jquery-3.4.1.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="60" selection-start-line="60" selection-end-line="62" selection-end-column="6" />
         </state>
       </provider>
     </entry>
