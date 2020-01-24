@@ -14,20 +14,11 @@
     <script src="public/main.js"></script>
 
     <script>
-        // ws = new WebSocket("ws://127.0.0.1:8000/?user=tester01");
-
-        // ws = new WebSocket("ws://192.168.15.105:8000/?user=tester01");
-
-        // ws = new WebSocket("ws://192.168.0.52:8000/?user=tester01");
-
-        ws = new WebSocket("ws://192.168.0.104:8000/?user=tester01");
-
-        ws.onmessage = function (evt) {
-            // alert(evt.data);
-
-            console.log('пришла evt.data:');
-            console.log(evt.data);
-        };
+        // ws = new WebSocket("ws://192.168.0.104:8000/?user=tester01");
+        // ws.onmessage = function (evt) {
+        //     console.log('пришла evt.data:');
+        //     console.log(evt.data);
+        // };
     </script>
 </head>
 
@@ -57,7 +48,8 @@
     <div class="flex-grow-1" id="second-row">
 
         <div class="login-logout">
-            <img src="public/_images/enter-512.png" class="img-fluid" alt="Responsive image">
+            <!--<img src="public/_images/enter-512.png" class="img-fluid" alt="Responsive image">-->
+            <img src="" class="img-fluid">
         </div>
 
         <!--<div class="col-sm-4 portlet-container portlet-dropzone">-->
