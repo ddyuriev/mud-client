@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="public/_images/icon.png">
+
+    <link rel="stylesheet" href="public/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <script src="public/jquery/jquery-3.4.1.min.js"></script>
+    <script src="public/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+
+    <link href="public/style.css" rel="stylesheet">
+    <script src="public/login.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="login-popup-wrap new_login_popup">
+    <div class="login-popup-heading text-center">
+        <h4><i class="fa fa-lock" aria-hidden="true"></i> Login </h4>
+    </div>
+    <form id="loginMember" role="form" action="" method="post">
+        <div class="form-group">
+            <input type="email" class="form-control" id="user_email" placeholder="email" name="user-email">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="user_password" placeholder="password" name="user-password">
+        </div>
+        <button id="login-button" type="button" class="btn btn-success login-popup-btn" name="submit" value="1">Login</button>
+    </form>
+    <div class="form-group text-center">
+        <a class="pwd-forget" href="javascript:void(0)" id="open_forgotPassword">Forget Password</a>
+    </div>
+    <div class="text-center">Not registered yet?<a href="http://192.168.50.34/abcc/membership-application">click
+        here</a></div>
+</div>
+
+<div class="alert alert-danger-email" role="alert">
+    <a href="#" class="alert-link">email incorrect</a>
+</div>
+<div class="alert alert-danger-password" role="alert">
+    <a href="#" class="alert-link">password can't be empty</a>
+</div>
+
+
+    <p>Enter an email address:</p>
+    <input id='email'>
+    <button type='submit' id='validate'>Validate!</button>
+
+<h2 id='result'></h2>
+
+</body>
+</html>
