@@ -17,13 +17,13 @@ main {
 }
 
 /*textarea {*/
-    /*height: 100%;*/
-    /*width: 100%;*/
+/*height: 100%;*/
+/*width: 100%;*/
 /*}*/
 
 /*.card-body {*/
-    /*height: 100%;*/
-    /*width: 100%;*/
+/*height: 100%;*/
+/*width: 100%;*/
 /*}*/
 
 .full-height {
@@ -32,10 +32,9 @@ main {
 }
 
 
-
 /*#main-panel-text {*/
-    /*position: absolute;*/
-    /*bottom: 0;*/
+/*position: absolute;*/
+/*bottom: 0;*/
 /*}*/
 
 
@@ -52,4 +51,10 @@ main {
     margin-left: -70px;
     height: 1.8%;
     width: 1.8%;
+}
+
+#logo {
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }

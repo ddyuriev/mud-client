@@ -19,27 +19,99 @@ function ajaxLogin() {
     });
 }
 
+function ajaxProfile(bearer) {
+    $.ajax({
+        type   : 'GET',
+        url    : "http://mud-back/api/profile?token=" + bearer,
+        cache  : false,
+        success: function (response) {
+            console.log(response);
+            // $('.login-logout img').attr("src","public/_images/exit-512.png");
+
+            let responseCode = response.code;
+            switch (responseCode) {
+                case 0:
+                    console.log('0');
+                    ajaxProfile(response.refreshed_token);
+                    localStorage.setItem("token", response.refreshed_token);
+                    break;
+                case 1:
+                    ajaxLogin();
+                    break;
+                case 2:
+                    console.log('2');
+                    ajaxLogin();
+                    break;
+                case 3:
+                    ajaxLogin();
+                    break;
+            }
+
+        },
+        error  : function (jqXHR, textStatus, errorThrown) {
+            console.log('жопа');
+            console.log(jqXHR.status, textStatus, errorThrown);
+
+            let responseText = jqXHR.responseText;
+            console.log('responseText');
+            console.log(responseText);
+            switch (responseCode) {
+                // case 0:
+                //     console.log('0');
+                //     ajaxProfile(response.refreshed_token);
+                //     localStorage.setItem("token", response.refreshed_token);
+                //     break;
+                case 1:
+                    ajaxLogin();
+                    break;
+                case 2:
+                    console.log('2');
+                    ajaxLogin();
+                    break;
+                case 3:
+                    ajaxLogin();
+                    break;
+            }
+        }
+    });
+}
+
 
 $(document).ready(function () {
     // console.log( "ready!" );
 
     if (bearer) {
-        $.ajax({
-            type   : 'GET',
-            url    : "http://mud-back/api/profile?token=" + bearer,
-            cache  : false,
-            success: function (response) {
-                console.log(response);
-                $('.login-logout img').attr("src","public/_images/exit-512.png");
-            },
-            error  : function (jqXHR, textStatus, errorThrown) {
-                console.log('жопа');
-                console.log(jqXHR.status, textStatus, errorThrown);
-                if (jqXHR.status == 401) {
-                    // ajaxLogin();
-                }
-            }
-        });
+        // $.ajax({
+        //     type   : 'GET',
+        //     url    : "http://mud-back/api/profile?token=" + bearer,
+        //     cache  : false,
+        //     success: function (response) {
+        //         console.log(response);
+        //         // $('.login-logout img').attr("src","public/_images/exit-512.png");
+        //
+        //         let responseCode = response.code;
+        //         switch (responseCode) {
+        //             case 0:
+        //                 alert('Маловато');
+        //                 break;
+        //             case 4:
+        //                 alert('В точку!');
+        //                 break;
+        //             case 5:
+        //                 alert('Перебор');
+        //                 break;
+        //             default:
+        //                 alert("Нет таких значений");
+        //         }
+        //
+        //     },
+        //     error  : function (jqXHR, textStatus, errorThrown) {
+        //         console.log('жопа');
+        //         console.log(jqXHR.status, textStatus, errorThrown);
+        //     }
+        // });
+
+        ajaxProfile(bearer);
 
     } else {
         ajaxLogin();
