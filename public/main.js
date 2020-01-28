@@ -3,21 +3,10 @@
 let bearer = localStorage.getItem("token");
 
 
-// function ajaxLogin() {
-//     $.ajax({
-//         url    : "http://mud-back/api/login",
-//         type   : "POST",
-//         data   : {
-//             'email'   : 'therion@mail.ru',
-//             'password': '1'
-//         },
-//         success: function (response) {
-//             console.log('login:');
-//             console.log(response);
-//             localStorage.setItem("token", response.token);
-//         },
-//     });
-// }
+function convertRemToPixels(rem) {
+    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+}
+
 
 function ajaxProfile(bearer) {
     $.ajax({
@@ -30,7 +19,7 @@ function ajaxProfile(bearer) {
 
             console.log(response.user);
             console.log(response.user.name);
-            $(".login-logout .btn").text(response.user.name);
+            $(".login-logout .btn").text(response.user.name.toLowerCase());
 
             // if(response.code == 0){
             //     ajaxProfile(response.refreshed_token);
@@ -63,6 +52,7 @@ function ajaxProfile(bearer) {
 
                     break;
                 case 1:
+                    console.log('1');
                     ajaxLogin();
                     break;
                 case 2:
@@ -71,6 +61,7 @@ function ajaxProfile(bearer) {
                     document.location.href = '/login.html';
                     break;
                 case 3:
+                    console.log('3');
                     ajaxLogin();
                     break;
             }
@@ -81,6 +72,9 @@ function ajaxProfile(bearer) {
 
 $(document).ready(function () {
     // console.log( "ready!" );
+
+
+    console.log( "ready!" );
 
     if (bearer) {
         ajaxProfile(bearer);
@@ -94,13 +88,16 @@ $(document).ready(function () {
     // console.log($('#main-panel-text div').height());
 
     let height = $('#second-row').height();
-    $('#main-panel-text div').height(height - 100);
+    // $('#main-panel-text div').height(height - 100);
+    // $('#main-panel-text div').height(height - 50);
+    $('#main-panel-text div').height(height - 42);
 
 });
 
 $(document).on("click", "#send-main", function (event) {
 
-    console.log('click');
+    console.log('convertRemToPixels(1)');
+    console.log(convertRemToPixels(1));
     // var values = $(this).serialize();
 
     let values = ['wwwww', 'asdasdasd'];
