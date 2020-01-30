@@ -1,7 +1,7 @@
 // let bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9tdWQtYmFja1wvYXBpXC9sb2dpbiIsImlhdCI6MTU3OTg3MTc1OSwiZXhwIjoxNTc5ODc1MzU5LCJuYmYiOjE1Nzk4NzE3NTksImp0aSI6InNuTUliakNoaUh2ZXlXZWkiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.uKMrVR21-TnXYj390bBmA8y4Bd0kT5zXPnx2KWdbLxE';
 
 let bearer = localStorage.getItem("token");
-let user   = {};
+let user = {};
 
 
 function convertRemToPixels(rem) {
@@ -15,11 +15,11 @@ function isEmptyObject(obj) {
 
 function ajaxProfile(bearer) {
     $.ajax({
-        type   : 'GET',
-        url    : "http://mud-back/api/profile?token=" + bearer,
-        cache  : false,
+        type: 'GET',
+        url: "http://mud-back/api/profile?token=" + bearer,
+        cache: false,
         /**/
-        async  : false,
+        async: false,
         /**/
         success: function (response) {
             // console.log('success, response:');
@@ -38,7 +38,7 @@ function ajaxProfile(bearer) {
             // }
 
         },
-        error  : function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.log('жопа');
             // console.log(jqXHR.status, textStatus, errorThrown);
 
@@ -79,16 +79,91 @@ function ajaxProfile(bearer) {
     });
 }
 
+function ajaxProfile2(bearer) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://mud-back/api/profile?token=" + bearer,); // async=true
+    xhr.onload = function (e) {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log('ajaxProfile2');
+            // console.log(xhr.responseText);
+            console.log(xhr.response);
+
+            user = xhr.response.user;
+            $(".login-logout .btn").text(user.name.toLowerCase());
+        }
+    };
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {   //if complete
+            if (xhr.status === 200) {  //check if "OK" (200)
+                //success
+            } else {
+                // error_handle_function(); //otherwise, some other code was returned
+                console.log('onerror- ajaxProfile2');
+                console.log(xhr.response);
+            }
+        }
+    };
+    xhr.send(null);
+}
+
+function ajaxProfile3(/*method, url*/) {
+
+    // user = {1: 2};
+    return new Promise(function (resolve, reject) {
+
+        console.log('Promise - user');
+        // console.log(Promise.resolve(user));
+        console.log(user);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://mud-back/api/profile?token=" + bearer,); // async=true
+        xhr.onload = function (e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log('ajaxProfile3');
+                // console.log(xhr.responseText);
+                // console.log(typeof(xhr.responseText));
+                // console.log(typeof(xhr.response));
+                // console.log(typeof(xhr.responseXML));
+                // console.log(xhr.response);
+                // console.log(xhr.responseXML);
+                // user = xhr.response.user;
+
+                let requestObj = JSON.parse(xhr.responseText);
+                user = requestObj.user;
+                $(".login-logout .btn").text(user.name.toLowerCase());
+            }
+        };
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {   //if complete
+                if (xhr.status === 200) {  //check if "OK" (200)
+                    //success
+                } else {
+                    // error_handle_function(); //otherwise, some other code was returned
+                    console.log('onerror- ajaxProfile2');
+                    console.log(xhr.response);
+                }
+            }
+        };
+        xhr.send();
+    });
+}
+
 
 $(document).ready(function () {
-    // console.log( "ready!" );
-    // console.log('ready - user:');
-    // console.log(user);
-    // console.log('isEmptyObject');
-    // console.log(isEmptyObject(user));
 
     if (bearer) {
-        ajaxProfile(bearer);
+        // ajaxProfile(bearer);
+        // ajaxProfile2(bearer);
+        // ajaxProfile3().then(function(response) {
+        //     console.log('response');
+        //     console.log(response);
+        //     user = {5:67};
+        // });
+
+
+        ajaxProfile3().then(response =>
+            console.log(response)
+        );
 
     } else {
         document.location.href = '/login.html';
@@ -106,6 +181,9 @@ $(document).ready(function () {
     $('#main-panel-text div').height(height);
 
     //пошел коннект к сокет-серверу
+
+    console.log('user');
+    console.log(user);
 
     if (!isEmptyObject(user)) {
         console.log('user');
@@ -150,12 +228,12 @@ $(document).on("click", "#send-main", function (event) {
     let values = ['wwwww', 'asdasdasd'];
 
     $.ajax({
-        url    : "http://mud-back/userinput",
-        type   : "post",
+        url: "http://mud-back/userinput",
+        type: "post",
         // data   : values,
         // data   : {info: values},
         // data   : {values},
-        data   : {'a': 'wwwww', 'b': 'asdasdasd'},
+        data: {'a': 'wwwww', 'b': 'asdasdasd'},
         success: function (response) {
 
             // You will get response from your PHP page (what you echo or print)
