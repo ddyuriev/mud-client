@@ -1,12 +1,12 @@
 // let bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9tdWQtYmFja1wvYXBpXC9sb2dpbiIsImlhdCI6MTU3OTg3MTc1OSwiZXhwIjoxNTc5ODc1MzU5LCJuYmYiOjE1Nzk4NzE3NTksImp0aSI6InNuTUliakNoaUh2ZXlXZWkiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.uKMrVR21-TnXYj390bBmA8y4Bd0kT5zXPnx2KWdbLxE';
 
 let bearer = localStorage.getItem("token");
-let user = {};
+let user   = {};
 
 
-// function convertRemToPixels(rem) {
-//     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-// }
+function convertRemToPixels(rem) {
+    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+}
 
 function isEmptyObject(obj) {
     return Object.entries(obj).length === 0 && obj.constructor === Object;
@@ -15,11 +15,11 @@ function isEmptyObject(obj) {
 
 function ajaxProfile(bearer) {
     $.ajax({
-        type: 'GET',
-        url: "http://mud-back/api/profile?token=" + bearer,
-        cache: false,
+        type   : 'GET',
+        url    : "http://mud-back/api/profile?token=" + bearer,
+        cache  : false,
         /**/
-        async: false,
+        async  : false,
         /**/
         success: function (response) {
             // console.log('success, response:');
@@ -38,7 +38,7 @@ function ajaxProfile(bearer) {
             // }
 
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error  : function (jqXHR, textStatus, errorThrown) {
             console.log('жопа');
             // console.log(jqXHR.status, textStatus, errorThrown);
 
@@ -98,19 +98,24 @@ $(document).ready(function () {
     // console.log($('#second-row').height());
     // console.log($('#main-panel-text div').height());
 
-    let height = $('#second-row').height();
+    // let height = $('#second-row').height();
+    let height = $('#main-panel').height();
+
     // $('#main-panel-text div').height(height - 100);
     // $('#main-panel-text div').height(height - 50);
-    $('#main-panel-text div').height(height - 42);
+    $('#main-panel-text div').height(height);
 
     //пошел коннект к сокет-серверу
 
     if (!isEmptyObject(user)) {
         console.log('user');
         console.log(user);
-        websocket = new WebSocket("ws://127.0.0.1:8000");
+        // websocket = new WebSocket("ws://127.0.0.1:8000");
+        /**/
+        websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+        /**/
 
-        websocket.onopen = function(ev) {
+        websocket.onopen = function (ev) {
             // template('#system_msg', "td", ['Вы подключены!'])
             // uniqueId = genarationString();
             // userColor = genarationColor();
@@ -129,15 +134,13 @@ $(document).ready(function () {
 
     }
 
-
 });
 
 $(document).on("click", "#send-main", function (event) {
 
-    // console.log('convertRemToPixels(1)');
-    // console.log(convertRemToPixels(1));
+    console.log('convertRemToPixels(2.5)');
+    console.log(convertRemToPixels(2.5));
     // var values = $(this).serialize();
-
 
     let message = {
         user: user,
@@ -147,12 +150,12 @@ $(document).on("click", "#send-main", function (event) {
     let values = ['wwwww', 'asdasdasd'];
 
     $.ajax({
-        url: "http://mud-back/userinput",
-        type: "post",
+        url    : "http://mud-back/userinput",
+        type   : "post",
         // data   : values,
         // data   : {info: values},
         // data   : {values},
-        data: {'a': 'wwwww', 'b': 'asdasdasd'},
+        data   : {'a': 'wwwww', 'b': 'asdasdasd'},
         success: function (response) {
 
             // You will get response from your PHP page (what you echo or print)
