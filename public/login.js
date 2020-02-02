@@ -13,7 +13,10 @@ function ajaxLogin(email, password) {
             console.log(response);
             if(response.token){
                 localStorage.setItem("token", response.token);
-                document.location.href = '/';
+                // document.location.href = '/';
+                /**/
+                document.location.href = '/test.html';
+                /**/
             }
 
         },

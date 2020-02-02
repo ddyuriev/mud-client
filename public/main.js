@@ -1,7 +1,7 @@
 // let bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9tdWQtYmFja1wvYXBpXC9sb2dpbiIsImlhdCI6MTU3OTg3MTc1OSwiZXhwIjoxNTc5ODc1MzU5LCJuYmYiOjE1Nzk4NzE3NTksImp0aSI6InNuTUliakNoaUh2ZXlXZWkiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.uKMrVR21-TnXYj390bBmA8y4Bd0kT5zXPnx2KWdbLxE';
 
 let bearer = localStorage.getItem("token");
-let user = {};
+let user = {'start' : 'val'};
 
 
 function convertRemToPixels(rem) {
@@ -128,8 +128,15 @@ function ajaxProfile3(/*method, url*/) {
                 // console.log(xhr.responseXML);
                 // user = xhr.response.user;
 
+                console.log('user - onload');
+                console.log(user);
+
                 let requestObj = JSON.parse(xhr.responseText);
                 user = requestObj.user;
+
+                console.log('start_user - onload2:');
+                console.log(user);
+                console.log('end_user - onload2:');
                 $(".login-logout .btn").text(user.name.toLowerCase());
             }
         };
@@ -152,7 +159,8 @@ function ajaxProfile3(/*method, url*/) {
 $(document).ready(function () {
 
     if (bearer) {
-        // ajaxProfile(bearer);
+        ajaxProfile(bearer);
+
         // ajaxProfile2(bearer);
         // ajaxProfile3().then(function(response) {
         //     console.log('response');
@@ -161,9 +169,9 @@ $(document).ready(function () {
         // });
 
 
-        ajaxProfile3().then(response =>
-            console.log(response)
-        );
+        // ajaxProfile3().then(response =>
+        //     console.log('dddddddddddddddddddd')
+        // );
 
     } else {
         document.location.href = '/login.html';
@@ -182,8 +190,9 @@ $(document).ready(function () {
 
     //пошел коннект к сокет-серверу
 
-    console.log('user');
+    console.log('___________________________user-end');
     console.log(user);
+    return;
 
     if (!isEmptyObject(user)) {
         console.log('user');
