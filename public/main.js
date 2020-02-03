@@ -1,6 +1,8 @@
 // let bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9tdWQtYmFja1wvYXBpXC9sb2dpbiIsImlhdCI6MTU3OTg3MTc1OSwiZXhwIjoxNTc5ODc1MzU5LCJuYmYiOjE1Nzk4NzE3NTksImp0aSI6InNuTUliakNoaUh2ZXlXZWkiLCJzdWIiOjEsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.uKMrVR21-TnXYj390bBmA8y4Bd0kT5zXPnx2KWdbLxE';
 
 let bearer = localStorage.getItem("token");
+let url = `http://mud-back/api/profile?token=`;
+
 let user = {'start' : 'val'};
 
 
@@ -156,27 +158,135 @@ function ajaxProfile3(/*method, url*/) {
 }
 
 
+async function xhrGetProfile(bearer) {
+    // const response = await fetch(url, {mode: 'cors'});
+    const response = await fetch(url + bearer);
+    const json = await response.json();
+
+    // console.log('xhrGetProfile - json');
+    // console.log(json);
+
+    let responseCode = json.code;
+
+    // console.log('responseCode');
+    // console.log(responseCode);
+    switch (responseCode) {
+        case 0:
+            console.log('case 0');
+            // ajaxProfile(response.refreshed_token);
+            // localStorage.setItem("token", response.refreshed_token);
+
+            // ajaxProfile(jqXHR.responseJSON.refreshed_token);
+            // localStorage.setItem("token", jqXHR.responseJSON.refreshed_token);
+
+            xhrGetProfile(json.refreshed_token).then(jsonRefreshed => {
+                // console.log('рефреш токена');
+                // console.log('json:');
+                // console.log(json);
+                // console.log('jsonRefreshed:');
+                // console.log(jsonRefreshed);
+                localStorage.setItem("token", json.refreshed_token);
+            });
+
+            break;
+        case 1:
+            console.log('1');
+            ajaxLogin();
+            break;
+        case 2:
+            console.log('2');
+            // ajaxLogin();
+            // document.location.href = '/login.html';
+            document.location.href = '/login.html';
+            break;
+        case 3:
+            console.log('3');
+            ajaxLogin();
+            break;
+    }
+
+    // console.log('перед return');
+    // console.log(json);
+    // console.log(jsonRefreshed);
+
+    return json;
+}
+
+
+if (bearer) {
+    xhrGetProfile(bearer)
+        .then(json => {
+            console.log('в блоке if bearer, json:');
+            console.log(json);
+
+            console.log('typeof json');
+            console.log(typeof json);
+
+            console.log(`json.hasOwnProperty("refreshed_token")`);
+            console.log(json.hasOwnProperty("refreshed_token"));
+
+            console.log(`json.hasOwnProperty("user")`);
+            console.log(json.hasOwnProperty("user"));
+
+
+            if (json.hasOwnProperty("user")){
+
+            }
+
+            user = json;
+        })
+        // .then(json => {
+        //     console.log('в блоке if bearer2, json:');
+        //     console.log(json);
+        // })
+        // .finally(json => {
+        //     console.log('в блоке if bearer,finally  json:');
+        //     console.log(json);
+        // })
+} else {
+    document.location.href = '/login.html';
+    // ajaxLogin();
+}
+
+// console.log(user.start);
+
+// setTimeout(function () {
+//     console.log('user.start == val');
+// }, 1000);
+
+// while (user.start == 'val') {
+//     setTimeout(function () {
+//         console.log('user.start == val');
+//     }, 1000);
+// }
+
+// timerId = setTimeout(function go() {
+//
+//     console.log('_______started: ');
+//     console.log(user);
+//
+//     setTimeout(go, 1000/* + i * 100*/);
+//
+// }, 5000);
+
+
+
 $(document).ready(function () {
 
-    if (bearer) {
-        ajaxProfile(bearer);
-
-        // ajaxProfile2(bearer);
-        // ajaxProfile3().then(function(response) {
-        //     console.log('response');
-        //     console.log(response);
-        //     user = {5:67};
-        // });
-
-
-        // ajaxProfile3().then(response =>
-        //     console.log('dddddddddddddddddddd')
-        // );
-
-    } else {
-        document.location.href = '/login.html';
-        // ajaxLogin();
-    }
+    // if (bearer) {
+    //     ajaxProfile(bearer);
+    //     // ajaxProfile2(bearer);
+    //     // ajaxProfile3().then(function(response) {
+    //     //     console.log('response');
+    //     //     console.log(response);
+    //     //     user = {5:67};
+    //     // });
+    //     // ajaxProfile3().then(response =>
+    //     //     console.log('dddddddddddddddddddd')
+    //     // );
+    // } else {
+    //     document.location.href = '/login.html';
+    // }
 
     // console.log($('#second-row').height());
     // console.log($('#main-panel-text div').height());
@@ -190,8 +300,8 @@ $(document).ready(function () {
 
     //пошел коннект к сокет-серверу
 
-    console.log('___________________________user-end');
-    console.log(user);
+    // console.log('___________________________user-end');
+    // console.log(user);
     return;
 
     if (!isEmptyObject(user)) {
