@@ -3,7 +3,7 @@
 let bearer = localStorage.getItem("token");
 let url = `http://mud-back/api/profile?token=`;
 
-let user = {'start' : 'val'};
+let user = {'start': 'val'};
 
 
 function convertRemToPixels(rem) {
@@ -168,6 +168,23 @@ async function xhrGetProfile(bearer) {
 
     let responseCode = json.code;
 
+
+    // if (json.hasOwnProperty("user")) {
+    //
+    //     let userPromise = new Promise(function(resolve, reject) {
+    //         // Эта функция будет вызвана автоматически
+    //
+    //         // В ней можно делать любые асинхронные операции,
+    //         // А когда они завершатся — нужно вызвать одно из:
+    //         // resolve(результат) при успешном выполнении
+    //         // reject(ошибка) при ошибке
+    //
+    //         console.log('userPromise - основное тело - json:');
+    //         console.log(json);
+    //     })
+    // }
+
+
     // console.log('responseCode');
     // console.log(responseCode);
     switch (responseCode) {
@@ -179,13 +196,23 @@ async function xhrGetProfile(bearer) {
             // ajaxProfile(jqXHR.responseJSON.refreshed_token);
             // localStorage.setItem("token", jqXHR.responseJSON.refreshed_token);
 
-            xhrGetProfile(json.refreshed_token).then(jsonRefreshed => {
-                // console.log('рефреш токена');
-                // console.log('json:');
-                // console.log(json);
+            // xhrGetProfile(json.refreshed_token).then(jsonRefreshed => {
+            //     // console.log('рефреш токена');
+            //     // console.log('json:');
+            //     // console.log(json);
+            //     // console.log('jsonRefreshed:');
+            //     // console.log(jsonRefreshed);
+            //     localStorage.setItem("token", json.refreshed_token);
+            // });
+
+            refreshedToken = json.refreshed_token;
+            xhrGetProfile(refreshedToken).then(json => {
+                console.log('рефреш токена');
+                console.log('json:');
+                console.log(json);
                 // console.log('jsonRefreshed:');
                 // console.log(jsonRefreshed);
-                localStorage.setItem("token", json.refreshed_token);
+                localStorage.setItem("token", refreshedToken);
             });
 
             break;
@@ -214,7 +241,8 @@ async function xhrGetProfile(bearer) {
 
 
 if (bearer) {
-    xhrGetProfile(bearer)
+    // xxx =
+        xhrGetProfile(bearer)
         .then(json => {
             console.log('в блоке if bearer, json:');
             console.log(json);
@@ -228,21 +256,40 @@ if (bearer) {
             console.log(`json.hasOwnProperty("user")`);
             console.log(json.hasOwnProperty("user"));
 
-
-            if (json.hasOwnProperty("user")){
-
-            }
+            //делаем промис
+            // if (json.hasOwnProperty("user")) {
+            //
+            //     let userPromise = new Promise(function(resolve, reject) {
+            //         // Эта функция будет вызвана автоматически
+            //
+            //         // В ней можно делать любые асинхронные операции,
+            //         // А когда они завершатся — нужно вызвать одно из:
+            //         // resolve(результат) при успешном выполнении
+            //         // reject(ошибка) при ошибке
+            //
+            //         console.log('userPromise - json:');
+            //         console.log(json);
+            //     })
+            // }
 
             user = json;
         })
-        // .then(json => {
-        //     console.log('в блоке if bearer2, json:');
-        //     console.log(json);
+    // .then(json => {
+    //     console.log('в блоке if bearer2, json:');
+    //     console.log(json);
+    // })
+    // .finally(json => {
+    //     console.log('в блоке if bearer,finally  json:');
+    //     console.log(json);
+    // })
+        //тоже самое
+        // .then(function (fulfilled) {
+        //     // yay, you got a new phone
+        //     console.log(fulfilled);
         // })
-        // .finally(json => {
-        //     console.log('в блоке if bearer,finally  json:');
-        //     console.log(json);
-        // })
+
+    // console.log('xxx');
+    // console.log(xxx);
 } else {
     document.location.href = '/login.html';
     // ajaxLogin();
@@ -270,6 +317,11 @@ if (bearer) {
 // }, 5000);
 
 
+// userPromise
+//     .finally(function (fulfilled) {
+//         // yay, you got a new phone
+//         console.log(fulfilled);
+//     })
 
 $(document).ready(function () {
 
