@@ -1,15 +1,15 @@
 let bearer = localStorage.getItem("token");
-let url    = `http://mud-back/api/profile?token=`;
+let url = `http://mud-back/api/profile?token=`;
 
 let myVar = 0;
-let user  = {};
+let user = {};
 
 let jsonXXX = 0;
 
 let fetchResponse2 = 0;
 
 function newWebSocketConnection(user) {
-    websocket        = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+    websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     websocket.onopen = function (ev) {
         console.log('onopen, Вы подключены!');
     }
@@ -46,32 +46,38 @@ const xhrGetProfile = async function (bearer) {
     // console.log(json);
 
     console.log(fetchResponse);
-    if (fetchResponse && fetchResponse.hasOwnProperty("code")){
+    if (fetchResponse && fetchResponse.hasOwnProperty("code")) {
         switch (fetchResponse.code) {
+            // refresh
             case 0:
                 console.log('case 0');
 
                 refreshedToken = fetchResponse.refreshed_token;
                 xhrGetProfile(refreshedToken).then(jsonXXX => {
                     console.log('рефреш токена');
-                    console.log('jsonXXX:');
-                    console.log(jsonXXX);
+                    // console.log('jsonXXX:');
+                    // console.log(jsonXXX);
                     console.log('refreshedToken:');
                     console.log(refreshedToken);
                     localStorage.setItem("token", refreshedToken);
 
                     fetchResponse2 = fetchResponse;
+
+                    // newWebSocketConnection(fetchResponse.user);
                 });
 
                 break;
+            //токен не парсится. Требуется логинить заново
             case 1:
                 console.log('1');
                 ajaxLogin();
                 break;
+            //токен попал в блеклист. Требуется логинить заново
             case 2:
                 console.log('2');
                 document.location.href = '/login.html';
                 break;
+            //тут врядли что будет, на всяк случай
             case 3:
                 console.log('3');
                 ajaxLogin();
@@ -118,8 +124,8 @@ const xhrGetProfile = async function (bearer) {
 
 setTimeout(
     function () {
-        console.log('Hello: ');
-        console.log(jsonXXX);
+        console.log('Hello-setTimeout: ');
+        // console.log(jsonXXX);
         console.log(fetchResponse2);
         // clearTimeout(1);
         // console.log(json);
@@ -157,6 +163,9 @@ if (bearer) {
     //     }
     //
     // })
+        .finally(function () {
+            newWebSocketConnection(fetchResponse2.user);
+        })
 } else {
     document.location.href = '/login.html';
 }
