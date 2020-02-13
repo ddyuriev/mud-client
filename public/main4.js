@@ -9,10 +9,14 @@ let jsonXXX = 0;
 let fetchResponse2 = 0;
 
 function newWebSocketConnection(user) {
-    websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
-    websocket.onopen = function (ev) {
-        console.log('onopen, Вы подключены!');
-    }
+
+    console.log('------------------newWebSocketConnection!');
+
+
+    // websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+    // websocket.onopen = function (ev) {
+    //     console.log('onopen, Вы подключены!');
+    // }
 }
 
 const xhrGetProfile = async function (bearer) {
@@ -41,9 +45,6 @@ const xhrGetProfile = async function (bearer) {
     //     .catch((error) => {
     //         console.log(error)
     //     });
-
-    // console.log('json');
-    // console.log(json);
 
     console.log(fetchResponse);
     if (fetchResponse && fetchResponse.hasOwnProperty("code")) {
