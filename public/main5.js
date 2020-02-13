@@ -9,6 +9,8 @@ let jsonXXX = 0;
 let fetchResponse2 = 0;
 let xhrGetProfileResult = 0;
 
+let secondIteration = 0;
+
 
 function convertRemToPixels(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -23,65 +25,71 @@ function newWebSocketConnection(user) {
     console.log('------------------newWebSocketConnection!');
 
 
-    // websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
-    // websocket.onopen = function (ev) {
-    //     console.log('onopen, Вы подключены!');
-    // }
+    websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+    websocket.onopen = function (ev) {
+        console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
+    }
 }
 
 const xhrGetProfile = async function (bearer) {
     const fetchResponse = await fetch(
         url + bearer)
         .then(response => response.json())
-        // .then(
-        // json => console.log(json)
-        // json => {
-        //     return json
-        // }
-        // )
         .catch(error => console.error('error:', error));
 
     console.log('fetchResponse:');
     console.log(fetchResponse);
 
-    return xhrGetProfileResult = fetchResponse;
-};
-
-xhrGetProfileObertka = async function (bearer) {
-
-    xhrGetProfile(bearer)
-        .catch(error => console.error('error:', error));
-
-    // console.log('fetchResponse:');
-    // console.log(fetchResponse);
-
-    console.log('xhrGetProfileResult:');
-    console.log(xhrGetProfileResult);
-
-    if (fetchResponse && fetchResponse.hasOwnProperty("code")) {
-        switch (fetchResponse.code) {
-            // refresh
-            case 0:
-                console.log('case 0');
-
-                refreshedToken = fetchResponse.refreshed_token;
-                xhrGetProfile(refreshedToken).then(jsonXXX => {
-                    console.log('рефреш токена');
-                    // console.log('jsonXXX:');
-                    // console.log(jsonXXX);
-                    console.log('refreshedToken:');
-                    console.log(refreshedToken);
-                    localStorage.setItem("token", refreshedToken);
-
-                    fetchResponse2 = fetchResponse;
-
-                    // newWebSocketConnection(fetchResponse.user);
-                });
-                break;
-        }
+    if (fetchResponse && fetchResponse.hasOwnProperty("user")){
+        console.log('случай удачного подключения - присваеваем user:');
+        user = fetchResponse;
+        newWebSocketConnection(user);
     }
+
+        xhrGetProfileResult = fetchResponse;
 };
 
+// if (xhrGetProfileResult && xhrGetProfileResult.hasOwnProperty("code")) {
+//     switch (fetchResponse.code) {
+//         // refresh
+//         case 0:
+//             console.log('case 0');
+//
+//             refreshedToken = fetchResponse.refreshed_token;
+//             xhrGetProfile(refreshedToken).then(jsonXXX => {
+//                 console.log('рефреш токена');
+//                 // console.log('jsonXXX:');
+//                 // console.log(jsonXXX);
+//                 console.log('refreshedToken:');
+//                 console.log(refreshedToken);
+//                 localStorage.setItem("token", refreshedToken);
+//
+//                 fetchResponse2 = fetchResponse;
+//
+//                 // newWebSocketConnection(fetchResponse.user);
+//             });
+//
+//             break;
+//         //токен не парсится. Требуется логинить заново
+//         case 1:
+//             console.log('1');
+//             ajaxLogin();
+//             break;
+//         //токен попал в блеклист. Требуется логинить заново
+//         case 2:
+//             console.log('2');
+//             document.location.href = '/login.html';
+//             break;
+//         //тут врядли что будет, на всяк случай
+//         case 3:
+//             console.log('3');
+//             ajaxLogin();
+//             break;
+//     }
+//
+// }
+
+// myVar = fetchResponse;
 
 
 // xhrGetProfile();
@@ -127,17 +135,71 @@ xhrGetProfileObertka = async function (bearer) {
 
 
 if (bearer) {
-    // xhrGetProfile(bearer)
+    xhrGetProfile(bearer)
+        .then(function () {
+            console.log('блок then: ');
+            console.log('xhrGetProfileResult:');
+            console.log(xhrGetProfileResult);
+
+            if (xhrGetProfileResult && xhrGetProfileResult.hasOwnProperty("code")) {
+                switch (xhrGetProfileResult.code) {
+                    // refresh
+                    case 0:
+                        console.log('case 0');
+
+                        refreshedToken = xhrGetProfileResult.refreshed_token;
+                        xhrGetProfile(refreshedToken).then(jsonXXX => {
+                            console.log('рефреш токена');
+                            console.log('refreshedToken:');
+                            console.log(refreshedToken);
+                            localStorage.setItem("token", refreshedToken);
+
+                            secondIteration = 1;
+
+                            // fetchResponse2 = fetchResponse;
+
+                            // newWebSocketConnection(fetchResponse.user);
+                        });
+
+                        break;
+                    //токен не парсится. Требуется логинить заново
+                    case 1:
+                        console.log('1');
+                        ajaxLogin();
+                        break;
+                    //токен попал в блеклист. Требуется логинить заново
+                    case 2:
+                        console.log('2');
+                        document.location.href = '/login.html';
+                        break;
+                    //тут врядли что будет, на всяк случай
+                    case 3:
+                        console.log('3');
+                        ajaxLogin();
+                        break;
+                }
+
+            }
+
+        })
+        .finally(function () {
+            console.log('блок finally: ');
+            // newWebSocketConnection(fetchResponse2.user);
+
+            if (!isEmptyObject(user) && secondIteration === 1){
+                newWebSocketConnection(user);
+            }
+        });
+
+    console.log('------------перед if------------');
+
+
+
+    // xhrGetProfileObertka(bearer)
     //     .finally(function () {
     //         console.log('блок finally: ');
     //         newWebSocketConnection(fetchResponse2.user);
     //     })
-
-    xhrGetProfileObertka(bearer)
-        .finally(function () {
-            console.log('блок finally: ');
-            newWebSocketConnection(fetchResponse2.user);
-        })
 } else {
     document.location.href = '/login.html';
 }
@@ -162,7 +224,6 @@ $(document).ready(function () {
     }
 
 });
-
 
 
 $(document).on("click", "#send-main", function (event) {
