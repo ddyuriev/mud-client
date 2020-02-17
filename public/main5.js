@@ -1,16 +1,10 @@
 let bearer = localStorage.getItem("token");
 let url = `http://mud-back/api/profile?token=`;
-
-let myVar = 0;
 let user = {};
-
-let jsonXXX = 0;
-
-let fetchResponse2 = 0;
 let xhrGetProfileResult = 0;
-
 let secondIteration = 0;
 
+let otladka = 0;
 
 function convertRemToPixels(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -21,10 +15,7 @@ function isEmptyObject(obj) {
 }
 
 function newWebSocketConnection(user) {
-
     console.log('------------------newWebSocketConnection!');
-
-
     websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     websocket.onopen = function (ev) {
         console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
@@ -32,6 +23,11 @@ function newWebSocketConnection(user) {
 }
 
 const xhrGetProfile = async function (bearer) {
+
+    console.log('###############otladka0:');
+    console.log(otladka);
+    otladka++;
+
     const fetchResponse = await fetch(
         url + bearer)
         .then(response => response.json())
@@ -40,99 +36,23 @@ const xhrGetProfile = async function (bearer) {
     console.log('fetchResponse:');
     console.log(fetchResponse);
 
-    if (fetchResponse && fetchResponse.hasOwnProperty("user")){
-        console.log('случай удачного подключения - присваеваем user:');
-        user = fetchResponse;
-        newWebSocketConnection(user);
-    }
+    // console.log('secondIteration:');
+    // console.log(secondIteration);
 
+    //базовый случай, когда токен принят сразу
+    if (fetchResponse && fetchResponse.hasOwnProperty("user")){
+
+        console.log('###############otladka1:');
+        console.log(otladka);
+        otladka++;
+
+        console.log('случай удачного подключения - присваеваем user:');
+        user = fetchResponse.user;
+        newWebSocketConnection(user);
+        document.getElementById('user-name-btn').innerText = user.email;
+    }
         xhrGetProfileResult = fetchResponse;
 };
-
-// if (xhrGetProfileResult && xhrGetProfileResult.hasOwnProperty("code")) {
-//     switch (fetchResponse.code) {
-//         // refresh
-//         case 0:
-//             console.log('case 0');
-//
-//             refreshedToken = fetchResponse.refreshed_token;
-//             xhrGetProfile(refreshedToken).then(jsonXXX => {
-//                 console.log('рефреш токена');
-//                 // console.log('jsonXXX:');
-//                 // console.log(jsonXXX);
-//                 console.log('refreshedToken:');
-//                 console.log(refreshedToken);
-//                 localStorage.setItem("token", refreshedToken);
-//
-//                 fetchResponse2 = fetchResponse;
-//
-//                 // newWebSocketConnection(fetchResponse.user);
-//             });
-//
-//             break;
-//         //токен не парсится. Требуется логинить заново
-//         case 1:
-//             console.log('1');
-//             ajaxLogin();
-//             break;
-//         //токен попал в блеклист. Требуется логинить заново
-//         case 2:
-//             console.log('2');
-//             document.location.href = '/login.html';
-//             break;
-//         //тут врядли что будет, на всяк случай
-//         case 3:
-//             console.log('3');
-//             ajaxLogin();
-//             break;
-//     }
-//
-// }
-
-// myVar = fetchResponse;
-
-
-// xhrGetProfile();
-
-
-// timerId = setTimeout(function go() {
-//     console.log('myVar: ');
-//     console.log(myVar);
-//     // setTimeout(go, 1000);
-//
-//     if (!myVar.hasOwnProperty("user")) {
-//         setTimeout(go, 3000);
-//     }
-//
-//     if (myVar.hasOwnProperty("user")) {
-//         console.log('clearTimeout: ');
-//         console.log(timerId);
-//         clearTimeout(timerId);
-//         user  = myVar.user;
-//         myVar = 0;
-//     }
-//
-// }, 5000);
-//
-//
-// setTimeout(
-//     function () {
-//         // alert("Hello");
-//         console.log('Hello: ');
-//         console.log(timerId);
-//         // clearTimeout(1);
-//         console.log(user);
-//
-//     },
-//     10000);
-
-// setTimeout(
-//     function () {
-//         console.log('Hello-setTimeout: ');
-//         console.log(fetchResponse2);
-//     },
-//     10000);
-
 
 if (bearer) {
     xhrGetProfile(bearer)
@@ -153,12 +73,7 @@ if (bearer) {
                             console.log('refreshedToken:');
                             console.log(refreshedToken);
                             localStorage.setItem("token", refreshedToken);
-
                             secondIteration = 1;
-
-                            // fetchResponse2 = fetchResponse;
-
-                            // newWebSocketConnection(fetchResponse.user);
                         });
 
                         break;
@@ -181,25 +96,27 @@ if (bearer) {
 
             }
 
-        })
-        .finally(function () {
-            console.log('блок finally: ');
-            // newWebSocketConnection(fetchResponse2.user);
-
-            if (!isEmptyObject(user) && secondIteration === 1){
-                newWebSocketConnection(user);
-            }
         });
+        // .finally(function () {
+        //     console.log('блок finally: ');
+        //     console.log('###############otladka-2-finally:');
+        //     console.log(otladka);
+        //     otladka++;
+        //
+        //     if (!isEmptyObject(user) && secondIteration === 1){
+        //
+        //         console.log('finally-got-user:');
+        //
+        //         console.log('###############otladka-3-finally:');
+        //         console.log(otladka);
+        //         otladka++;
+        //
+        //         newWebSocketConnection(user);
+        //     }
+        // });
 
-    console.log('------------перед if------------');
+    // console.log('------------перед if------------');
 
-
-
-    // xhrGetProfileObertka(bearer)
-    //     .finally(function () {
-    //         console.log('блок finally: ');
-    //         newWebSocketConnection(fetchResponse2.user);
-    //     })
 } else {
     document.location.href = '/login.html';
 }
