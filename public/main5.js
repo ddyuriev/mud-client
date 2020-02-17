@@ -19,8 +19,36 @@ function newWebSocketConnection(user) {
     websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     websocket.onopen = function (ev) {
         console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
-    }
+    };
+
+    websocket.onmessage = function (ev) {
+
+        var msg   = JSON.parse(ev.data);
+        var umsg  = msg.message;
+        var uname = msg.name;
+        var utime = msg.time;
+
+
+        console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
+        console.log(msg);
+    };
 }
+
+/**/
+// websocket.onmessage = function (ev) {
+//
+//     var msg   = JSON.parse(ev.data);
+//     var umsg  = msg.message;
+//     var uname = msg.name;
+//     var utime = msg.time;
+//
+//
+//     console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
+//     console.log(ev.data);
+// };
+
+
+/**/
 
 const xhrGetProfile = async function (bearer) {
 
