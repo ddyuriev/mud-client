@@ -4,6 +4,8 @@ let user = {};
 let xhrGetProfileResult = 0;
 let secondIteration = 0;
 
+let gameProcess = '';
+
 let otladka = 0;
 
 function convertRemToPixels(rem) {
@@ -47,6 +49,7 @@ function newWebSocketConnection(user) {
                 console.log('msg.messageKey');
                 console.log(msg[messageKey]);
 
+                gameProcess = msg[messageKey];
                 document.getElementById('main-panel-text-finally').innerText = msg[messageKey];
 
                 break;
