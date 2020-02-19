@@ -34,8 +34,52 @@ function newWebSocketConnection(user) {
 
         console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
         console.log(msg);
+
+        // console.log('msg key:');
+        // console.log(Object.keys(msg)[0]);
+
+        let messageKey = Object.keys(msg)[0];
+
+        switch (messageKey) {
+            // refresh
+            case 'selectCharacterDialog':
+
+                console.log('msg.messageKey');
+                console.log(msg[messageKey]);
+
+                document.getElementById('main-panel-text-finally').innerText = msg[messageKey];
+
+                break;
+            // case 1:
+            //     console.log('1');
+            //     ajaxLogin();
+            //     break;
+        }
+
+
     };
 }
+
+
+// define a handler
+function doc_keyUp(e) {
+
+    // console.log(e);
+
+    // this would test for whichever key is 40 and the ctrl key at the same time
+    // if (e.ctrlKey && e.keyCode == 40) {
+    //     // call your function to do the thing
+    //     console.log('enter pressed');
+    // }
+
+    if (e.key == 'Enter' && e.keyCode == 13) {
+        // call your function to do the thing
+        console.log('enter pressed');
+    }
+}
+
+// register the handler
+document.addEventListener('keyup', doc_keyUp, false);
 
 //test backup0217
 
@@ -57,29 +101,26 @@ function newWebSocketConnection(user) {
 
 const xhrGetProfile = async function (bearer) {
 
-    console.log('###############otladka0:');
-    console.log(otladka);
-    otladka++;
+    // console.log('###############otladka0:');
+    // console.log(otladka);
+    // otladka++;
 
     const fetchResponse = await fetch(
         url + bearer)
         .then(response => response.json())
         .catch(error => console.error('error:', error));
 
-    console.log('fetchResponse:');
-    console.log(fetchResponse);
-
-    // console.log('secondIteration:');
-    // console.log(secondIteration);
+    // console.log('fetchResponse:');
+    // console.log(fetchResponse);
 
     //базовый случай, когда токен принят сразу
     if (fetchResponse && fetchResponse.hasOwnProperty("user")){
 
-        console.log('###############otladka1:');
-        console.log(otladka);
-        otladka++;
+        // console.log('###############otladka1:');
+        // console.log(otladka);
+        // otladka++;
 
-        console.log('случай удачного подключения - присваеваем user:');
+        // console.log('случай удачного подключения - присваеваем user:');
         user = fetchResponse.user;
         newWebSocketConnection(user);
         document.getElementById('user-name-btn').innerText = user.email;
@@ -90,21 +131,21 @@ const xhrGetProfile = async function (bearer) {
 if (bearer) {
     xhrGetProfile(bearer)
         .then(function () {
-            console.log('блок then: ');
-            console.log('xhrGetProfileResult:');
-            console.log(xhrGetProfileResult);
+            // console.log('блок then: ');
+            // console.log('xhrGetProfileResult:');
+            // console.log(xhrGetProfileResult);
 
             if (xhrGetProfileResult && xhrGetProfileResult.hasOwnProperty("code")) {
                 switch (xhrGetProfileResult.code) {
                     // refresh
                     case 0:
-                        console.log('case 0');
+                        // console.log('case 0');
 
                         refreshedToken = xhrGetProfileResult.refreshed_token;
                         xhrGetProfile(refreshedToken).then(jsonXXX => {
-                            console.log('рефреш токена');
-                            console.log('refreshedToken:');
-                            console.log(refreshedToken);
+                            // console.log('рефреш токена');
+                            // console.log('refreshedToken:');
+                            // console.log(refreshedToken);
                             localStorage.setItem("token", refreshedToken);
                             secondIteration = 1;
                         });
@@ -168,10 +209,10 @@ $(document).ready(function () {
     $('#main-panel-text div').height(height);
 
     //пошел коннект к сокет-серверу
-    if (!isEmptyObject(user)) {
-        console.log('___________________________user !empty');
-        console.log(user);
-    }
+    // if (!isEmptyObject(user)) {
+    //     console.log('___________________________user !empty');
+    //     console.log(user);
+    // }
 
 });
 
@@ -179,7 +220,7 @@ $(document).ready(function () {
 $(document).on("click", "#send-main", function (event) {
 
     console.log('convertRemToPixels(2.5)');
-    console.log(convertRemToPixels(2.5));
+    // console.log(convertRemToPixels(2.5));
     // var values = $(this).serialize();
 
     let message = {
