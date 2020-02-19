@@ -109,3 +109,10 @@ a{
 }
 
 /*END>>> login form*/
+
+
+/*input on focus*/
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.1rem rgba(40, 167, 69, 0.1);
+}

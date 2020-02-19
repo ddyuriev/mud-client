@@ -43,7 +43,6 @@ function newWebSocketConnection(user) {
         let messageKey = Object.keys(msg)[0];
 
         switch (messageKey) {
-            // refresh
             case 'selectCharacterDialog':
 
                 console.log('msg.messageKey');
@@ -65,24 +64,26 @@ function newWebSocketConnection(user) {
 
 
 // define a handler
-function doc_keyUp(e) {
-
-    // console.log(e);
-
-    // this would test for whichever key is 40 and the ctrl key at the same time
-    // if (e.ctrlKey && e.keyCode == 40) {
-    //     // call your function to do the thing
-    //     console.log('enter pressed');
-    // }
-
-    if (e.key == 'Enter' && e.keyCode == 13) {
+function onEnterKeyUp(e) {
+    if (e.key === 'Enter' && e.keyCode === 13) {
         // call your function to do the thing
         console.log('enter pressed');
+
+        console.log('user');
+        console.log(user.uuid);
+
+        let msg = {
+            message  : 'ыыыыыы',
+            name     : 'testName',
+            uuid : user.uuid,
+            userColor: ''
+        };
+
+        websocket.send(JSON.stringify(msg));
     }
 }
-
 // register the handler
-document.addEventListener('keyup', doc_keyUp, false);
+document.addEventListener('keyup', onEnterKeyUp, false);
 
 //test backup0217
 
