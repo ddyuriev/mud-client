@@ -1,8 +1,8 @@
-let bearer = localStorage.getItem("token");
-let url = `http://mud-back/api/profile?token=`;
-let user = {};
+let bearer              = localStorage.getItem("token");
+let url                 = `http://mud-back/api/profile?token=`;
+let user                = {};
 let xhrGetProfileResult = 0;
-let secondIteration = 0;
+let secondIteration     = 0;
 
 let gameProcess = '';
 
@@ -17,7 +17,7 @@ function isEmptyObject(obj) {
 }
 
 function newWebSocketConnection(user) {
-    console.log('------------------newWebSocketConnection!');
+    // console.log('------------------newWebSocketConnection!');
     // websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     /**/
     websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
@@ -45,11 +45,20 @@ function newWebSocketConnection(user) {
         switch (messageKey) {
             case 'selectCharacterDialog':
 
-                console.log('msg.messageKey');
-                console.log(msg[messageKey]);
+                // console.log('msg.messageKey');
+                // console.log(msg[messageKey]);
 
-                gameProcess = msg[messageKey];
+                gameProcess                                                  = msg[messageKey];
                 document.getElementById('main-panel-text-finally').innerText = msg[messageKey];
+
+                break;
+            case 'for_client':
+
+                // console.log('msg.messageKey');
+                // console.log(msg[messageKey]);
+
+                // gameProcess = msg[messageKey];
+                document.getElementById('main-panel-text-finally').innerText += msg[messageKey];
 
                 break;
             // case 1:
@@ -65,6 +74,9 @@ function newWebSocketConnection(user) {
 
 // define a handler
 function onEnterKeyUp(e) {
+
+    let inputElement = document.getElementById("main-input");
+
     if (e.key === 'Enter' && e.keyCode === 13) {
         // call your function to do the thing
         console.log('enter pressed');
@@ -73,15 +85,16 @@ function onEnterKeyUp(e) {
         console.log(user.uuid);
 
         let msg = {
-            message  : 'ыыыыыы',
-            name     : 'testName',
-            uuid : user.uuid,
-            userColor: ''
+            message: inputElement.value,
+            name   : user.email,
+            uuid   : user.uuid
         };
 
         websocket.send(JSON.stringify(msg));
+        inputElement.value = "";
     }
 }
+
 // register the handler
 document.addEventListener('keyup', onEnterKeyUp, false);
 
@@ -118,7 +131,7 @@ const xhrGetProfile = async function (bearer) {
     // console.log(fetchResponse);
 
     //базовый случай, когда токен принят сразу
-    if (fetchResponse && fetchResponse.hasOwnProperty("user")){
+    if (fetchResponse && fetchResponse.hasOwnProperty("user")) {
 
         // console.log('###############otladka1:');
         // console.log(otladka);
@@ -129,7 +142,7 @@ const xhrGetProfile = async function (bearer) {
         newWebSocketConnection(user);
         document.getElementById('user-name-btn').innerText = user.email;
     }
-        xhrGetProfileResult = fetchResponse;
+    xhrGetProfileResult = fetchResponse;
 };
 
 if (bearer) {
@@ -175,23 +188,23 @@ if (bearer) {
             }
 
         });
-        // .finally(function () {
-        //     console.log('блок finally: ');
-        //     console.log('###############otladka-2-finally:');
-        //     console.log(otladka);
-        //     otladka++;
-        //
-        //     if (!isEmptyObject(user) && secondIteration === 1){
-        //
-        //         console.log('finally-got-user:');
-        //
-        //         console.log('###############otladka-3-finally:');
-        //         console.log(otladka);
-        //         otladka++;
-        //
-        //         newWebSocketConnection(user);
-        //     }
-        // });
+    // .finally(function () {
+    //     console.log('блок finally: ');
+    //     console.log('###############otladka-2-finally:');
+    //     console.log(otladka);
+    //     otladka++;
+    //
+    //     if (!isEmptyObject(user) && secondIteration === 1){
+    //
+    //         console.log('finally-got-user:');
+    //
+    //         console.log('###############otladka-3-finally:');
+    //         console.log(otladka);
+    //         otladka++;
+    //
+    //         newWebSocketConnection(user);
+    //     }
+    // });
 
     // console.log('------------перед if------------');
 
@@ -235,12 +248,12 @@ $(document).on("click", "#send-main", function (event) {
     let values = ['wwwww', 'asdasdasd'];
 
     $.ajax({
-        url: "http://mud-back/userinput",
-        type: "post",
+        url    : "http://mud-back/userinput",
+        type   : "post",
         // data   : values,
         // data   : {info: values},
         // data   : {values},
-        data: {'a': 'wwwww', 'b': 'asdasdasd'},
+        data   : {'a': 'wwwww', 'b': 'asdasdasd'},
         success: function (response) {
 
             // You will get response from your PHP page (what you echo or print)
