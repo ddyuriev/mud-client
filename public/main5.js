@@ -71,7 +71,6 @@ function newWebSocketConnection(user) {
     };
 }
 
-
 // define a handler
 function onEnterKeyUp(e) {
 
