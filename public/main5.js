@@ -42,6 +42,12 @@ function newWebSocketConnection(user) {
 
         let messageKey = Object.keys(msg)[0];
 
+        /**/
+        let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
+        console.log('innerHTML');
+        console.log(innerHTML);
+        /**/
+
         switch (messageKey) {
             case 'selectCharacterDialog':
 
@@ -58,7 +64,10 @@ function newWebSocketConnection(user) {
                 // console.log(msg[messageKey]);
 
                 // gameProcess = msg[messageKey];
-                document.getElementById('main-panel-text-finally').innerText += msg[messageKey];
+                // document.getElementById('main-panel-text-finally').innerText += msg[messageKey];
+                // document.getElementById('main-panel-text-finally').innerHTML += msg[messageKey];
+                document.getElementById('main-panel-text-finally').innerHTML = innerHTML + msg[messageKey];
+                // document.getElementById('main-panel-text-finally').outerHTML += msg[messageKey];
 
                 break;
             // case 1:
@@ -177,10 +186,10 @@ if (bearer) {
                         console.log('2');
                         document.location.href = '/login.html';
                         break;
-                    //тут врядли что будет, на всяк случай
+                    //Token has expired and can no longer be refreshed
                     case 3:
                         console.log('3');
-                        ajaxLogin();
+                        document.location.href = '/login.html';
                         break;
                 }
 
