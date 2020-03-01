@@ -1,9 +1,9 @@
-let bearer = localStorage.getItem("token");
+let bearer              = localStorage.getItem("token");
 // let url                 = `http://mud-back/api/profile?token=`;
-let url = 'http://mud-back/api/profile?token=';
-let user = {};
+let url                 = 'http://mud-back/api/profile?token=';
+let user                = {};
 let xhrGetProfileResult = 0;
-let secondIteration = 0;
+let secondIteration     = 0;
 
 let gameProcess = '';
 
@@ -30,8 +30,8 @@ function newWebSocketConnection(user) {
 
     websocket.onmessage = function (ev) {
 
-        var msg = JSON.parse(ev.data);
-        var umsg = msg.message;
+        var msg   = JSON.parse(ev.data);
+        var umsg  = msg.message;
         var uname = msg.name;
         var utime = msg.time;
 
@@ -56,11 +56,9 @@ function newWebSocketConnection(user) {
                 // console.log('msg.messageKey');
                 // console.log(msg[messageKey]);
 
-                gameProcess = msg[messageKey];
+                gameProcess                                                  = msg[messageKey];
                 // document.getElementById('main-panel-text-finally').innerText = msg[messageKey];
-                // document.getElementById('main-panel-text-finally').innerHTML = msg[messageKey];
-                // document.getElementById('main-panel-text-finally').innerHTML = innerHTML + msg[messageKey];
-                document.getElementById('main-panel-text-finally').innerHTML = msg[messageKey] + innerHTML;
+                document.getElementById('main-panel-text-finally').innerHTML = msg[messageKey];
 
                 break;
             case 'for_client':
@@ -71,10 +69,8 @@ function newWebSocketConnection(user) {
                 // gameProcess = msg[messageKey];
                 // document.getElementById('main-panel-text-finally').innerText += msg[messageKey];
                 // document.getElementById('main-panel-text-finally').innerHTML += msg[messageKey];
-                // document.getElementById('main-panel-text-finally').innerHTML = innerHTML + msg[messageKey];
+                document.getElementById('main-panel-text-finally').innerHTML = innerHTML + msg[messageKey];
                 // document.getElementById('main-panel-text-finally').outerHTML += msg[messageKey];
-
-                document.getElementById('main-panel-text-finally').innerHTML = msg[messageKey] + innerHTML;
 
                 break;
             // case 1:
@@ -101,8 +97,8 @@ function onEnterKeyUp(e) {
 
         let msg = {
             message: inputElement.value,
-            name: user.email,
-            uuid: user.uuid
+            name   : user.email,
+            uuid   : user.uuid
         };
 
         websocket.send(JSON.stringify(msg));
@@ -251,49 +247,62 @@ $(document).ready(function () {
 
 $(document).on("click", "#send-main", function (event) {
 
-    console.log('convertRemToPixels(2.5)');
-    // console.log(convertRemToPixels(2.5));
-    // var values = $(this).serialize();
+    // console.log('convertRemToPixels(2.5)');
+    // // console.log(convertRemToPixels(2.5));
+    // // var values = $(this).serialize();
+    //
+    // let message = {
+    //     user: user,
+    // };
+    //
+    // let values = ['wwwww', 'asdasdasd'];
+    //
+    // $.ajax({
+    //     url    : "http://mud-back/userinput",
+    //     type   : "post",
+    //     // data   : values,
+    //     // data   : {info: values},
+    //     // data   : {values},
+    //     data   : {'a': 'wwwww', 'b': 'asdasdasd'},
+    //     success: function (response) {
+    //
+    //         // You will get response from your PHP page (what you echo or print)
+    //
+    //         console.log(response);
+    //
+    //         // $('#panel-body').find('.panel-body').append('Adding more content here :)');
+    //
+    //         // $('#main-panel').append('Adding more content here :)' + "<br>");
+    //
+    //         // $('#main-panel-text').append('Adding more content here :)' + "<br>");
+    //         // $('#main-panel-text').append('Adding more content here :)' + "<br>");
+    //         // $('#main-panel-text').append('Adding more content here :)' + "<br>");
+    //         // $('#main-panel-text').append('Adding more content here :)' + "<br>");
+    //
+    //
+    //         $('#main-panel-text div').append('Adding more content here :)' + "<br>");
+    //         $('#main-panel-text div').append('Adding more content here :)' + "<br>");
+    //         $('#main-panel-text div').append('<text style="color:darkgreen">Adding more content here :)</text>' + "<br>");
+    //         $('#main-panel-text div').append('Adding more content here :)' + "<br>");
+    //     },
+    //     // error  : function (jqXHR, textStatus, errorThrown) {
+    //     //     console.log(textStatus, errorThrown);
+    //     // }
+    // });
 
-    let message = {
-        user: user,
-    };
-    // websocket.send(JSON.stringify(message));
 
-    let values = ['wwwww', 'asdasdasd'];
-
-    $.ajax({
-        url: "http://mud-back/userinput",
-        type: "post",
-        // data   : values,
-        // data   : {info: values},
-        // data   : {values},
-        data: {'a': 'wwwww', 'b': 'asdasdasd'},
-        success: function (response) {
-
-            // You will get response from your PHP page (what you echo or print)
-
-            console.log(response);
-
-            // $('#panel-body').find('.panel-body').append('Adding more content here :)');
-
-            // $('#main-panel').append('Adding more content here :)' + "<br>");
-
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
+    // let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
+    let newEl = '<div style="color:darkgreen">Adding more content here :)</div>';
+    // let newEl = 'Adding more content here<br>';
+    // document.getElementById('main-panel-text-finally').innerHTML = innerHTML + newEl;
 
 
-            $('#main-panel-text div').append('Adding more content here :)' + "<br>");
-            $('#main-panel-text div').append('Adding more content here :)' + "<br>");
-            $('#main-panel-text div').append('<text style="color:darkgreen">Adding more content here :)</text>' + "<br>");
-            $('#main-panel-text div').append('Adding more content here :)' + "<br>");
-        },
-        // error  : function (jqXHR, textStatus, errorThrown) {
-        //     console.log(textStatus, errorThrown);
-        // }
-    });
+    document.getElementById('main-panel-text-finally').insertAdjacentHTML('beforeend', newEl);
+
+    // let text = document.createTextNode("This just got added");
+    // let text = document.createElement("span");
+
+    // document.getElementById('main-panel-text-finally').appendChild(text);
 
 
 });

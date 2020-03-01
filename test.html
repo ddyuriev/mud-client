@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <script language="JavaScript" type="text/javascript">
+        function addHtml() {
+            let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
+            let newEl = 'Adding more content here' + + new Date() + '<br>';
+            // let newEl = '<span style="color:darkgreen">Adding more content here :)</span>';
+            document.getElementById('main-panel-text-finally').innerHTML = innerHTML + newEl;
+        }
+    </script>
+
+    <style>
+        #main-panel-text-finally {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    </style>
+</head>
+
+
+<div id="main-panel-text-finally" style="overflow-y: auto; height:350px; width:650px;">
+    <span style="color:darkgreen">Proin eget justo id metus varius tristique non blandit augue.</span>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ante elit, porttitor
+    placerat sagittis quis, aliquam a lectus. Aenean bibendum volutpat orci, ac consequat risus
+    consectetur quis. Nulla id tellus purus, a pretium quam. Morbi a lorem lorem, vitae fringilla
+    neque. Suspendisse lacinia interdum tellus ut rhoncus.
+    <span style="color:darkgreen">Morbi fermentum laoreet risus, eget ornare velit consequat ut. Suspendisse potenti.</span>
+</div>
+
+
+<button class="btn btn-outline-secondary" type="button" id="send-main" onclick="addHtml()">send</button>
+
+</html>

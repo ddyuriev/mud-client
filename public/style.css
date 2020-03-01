@@ -38,8 +38,7 @@ main {
 /*}*/
 
 
-#main-panel-text div {
-
+#main-panel-text-finally {
     display: flex;
     flex-direction: column-reverse;
 }

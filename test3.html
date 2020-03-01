@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>flex-direction</title>
+
+    <script language="JavaScript" type="text/javascript">
+        function addHtml() {
+            let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
+            // let newEl = 'Adding more content here' + +  new Date() + '<br>';
+            // let newEl = 'Adding more content here' + new Date().getSeconds() + new Date().getMilliseconds() + '<br>';
+            let newEl = '<li style="color:green">Adding more content here :)' +  new Date().getSeconds() + '.' + new Date().getMilliseconds() + '</li>';
+            document.getElementById('main-panel-text-finally').innerHTML = innerHTML + newEl;
+        }
+    </script>
+
+    <style>
+        .flex-row {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    </style>
+</head>
+<body>
+<ul id="main-panel-text-finally" class="flex-row">
+    <li><img src="thumb1.jpg" alt=""></li>
+    <li><img src="thumb2.jpg" alt=""></li>
+    <li><img src="thumb3.jpg" alt=""></li>
+</ul>
+
+<button class="btn btn-outline-secondary" type="button" id="send-main" onclick="addHtml()">send</button>
+
+</body>

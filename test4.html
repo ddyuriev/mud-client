@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <script language="JavaScript" type="text/javascript">
+        function addHtml() {
+            let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
+            // let newEl = 'Adding more content here' + +  new Date() + '<br>';
+            // let newEl = 'Adding more content here' + new Date().getSeconds() + new Date().getMilliseconds() + '<br>';
+            let newEl = '<span class="item" style="color:green">Adding more content here :)' + new Date().getSeconds() + '.' + new Date().getMilliseconds() + '</span>';
+            // document.getElementById('main-panel-text-finally').innerHTML = innerHTML + newEl;
+
+            let result = innerHTML + newEl;
+
+
+            console.log(result);
+
+            document.getElementById('main-panel-text-finally').innerHTML = '';
+            document.getElementById('main-panel-text-finally').innerHTML = result;
+        }
+    </script>
+
+    <style>
+        #main-panel-text-finally {
+            display: flex;
+            flex-direction: column-reverse;
+            /*flex-direction: column;*/
+            /*transform: rotate(180deg);*/
+        }
+
+        /*.item {*/
+            /*transform: rotate(180deg);*/
+        /*}*/
+
+        /*#main {*/
+            /*transform: rotate(180deg);*/
+        /*}*/
+    </style>
+</head>
+
+<div id="main" style="overflow-y: auto; height:350px; width:650px;">
+
+
+    <div id="main-panel-text-finally" style="overflow-y: auto; height:350px; width:650px;">
+
+    </div>
+</div>
+
+
+<button class="btn btn-outline-secondary" type="button" id="send-main" onclick="addHtml()">send</button>
+
+</html>

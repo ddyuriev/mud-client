@@ -1,0 +1,8 @@
+https://ru.stackoverflow.com/questions/1089438/¬ыводить-новые-элементы-внизу-списка
+
+всего лишь нужно было изменить пор€док сложени€))
+
+
+document.getElementById('main-panel-text-finally').innerHTML = innerHTML + newEl;
+=>
+document.getElementById('main-panel-text-finally').innerHTML = newEl + innerHTML;
