@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <script language="JavaScript" type="text/javascript">
+        function addHtml() {
+            let date      = new Date();
+            let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
+            // let newEl = 'Adding more content here' + date.getSeconds() + date.getMilliseconds() + '<br>';
+            let newEl     = '<span style="color:green">Adding more content here :)' + date.getSeconds() + '.' + date.getMilliseconds() + '</span>';
+            // document.getElementById('main-panel-text-finally').innerHTML = newEl + innerHTML;
+
+
+            let newDiv       = document.createElement("div");
+            newDiv.innerHTML = "<span>hello!" + date.getSeconds() + '.' + date.getMilliseconds() + "</span>";
+            document.getElementById('main-panel-text-finally').appendChild(newDiv);
+        }
+    </script>
+
+    <style>
+        #main-panel-text-finally {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+
+        #main-panel-text-finally div {
+            float: left;
+        }
+    </style>
+</head>
+
+
+<div id="main-panel-text-finally" style="overflow-y: auto; height:350px; width:650px;">
+
+</div>
+
+
+<button class="btn btn-outline-secondary" type="button" id="send-main" onclick="addHtml()">send</button>
+
+</html>
