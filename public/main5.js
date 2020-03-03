@@ -19,10 +19,10 @@ function isEmptyObject(obj) {
 
 function newWebSocketConnection(user) {
     // console.log('------------------newWebSocketConnection!');
-    // websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+    websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     /**/
     // websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email);
-    websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
+    // websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
     /**/
     websocket.onopen = function (ev) {
         console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
