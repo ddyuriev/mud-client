@@ -20,10 +20,17 @@ function isEmptyObject(obj) {
 function newWebSocketConnection(user) {
     // console.log('------------------newWebSocketConnection!');
     // websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
-    /**/
     // websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email);
-    websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
+    // websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
+    if (user.at_home) {
+        websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+    } else {
+        websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
+    }
+
     /**/
+
+
     websocket.onopen = function (ev) {
         console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
     };
@@ -91,10 +98,10 @@ function newWebSocketConnection(user) {
 function onEnterKeyUp(e) {
 
     /**/
-    let charCode = (e.which) ? e.which : event.keyCode;
-    console.log("KeyCode: "+charCode);
-    if (charCode >= 96 && charCode <= 106 )
-        console.log("Numlock number detected: "+charCode);
+    // let charCode = (e.which) ? e.which : event.keyCode;
+    // console.log("KeyCode: " + charCode);
+    // if (charCode >= 96 && charCode <= 106)
+    //     console.log("Numlock number detected: " + charCode);
     /**/
 
     let inputElement = document.getElementById("main-input");
@@ -147,6 +154,17 @@ function onEnterKeyUp(e) {
         // inputElement.value = "";
     }
 
+    //numpad 4
+    if (e.keyCode === 37 || e.keyCode === 100) {
+
+        console.log(e);
+
+        msg.message = 'west';
+
+        // websocket.send(JSON.stringify(msg));
+        // inputElement.value = "";
+    }
+
     websocket.send(JSON.stringify(msg));
 }
 
@@ -158,7 +176,7 @@ document.onkeydown = function (e) {
     if (e.which >= 96 && e.which <= 105) {
         return false;
     }
-}
+};
 
 /**/
 // websocket.onmessage = function (ev) {
