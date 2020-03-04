@@ -19,10 +19,10 @@ function isEmptyObject(obj) {
 
 function newWebSocketConnection(user) {
     // console.log('------------------newWebSocketConnection!');
-    websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+    // websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     /**/
     // websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email);
-    // websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
+    websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
     /**/
     websocket.onopen = function (ev) {
         console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
@@ -46,8 +46,8 @@ function newWebSocketConnection(user) {
 
         /**/
         let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
-        console.log('innerHTML');
-        console.log(innerHTML);
+        // console.log('innerHTML');
+        // console.log(innerHTML);
         /**/
 
         switch (messageKey) {
@@ -90,7 +90,21 @@ function newWebSocketConnection(user) {
 // define a handler
 function onEnterKeyUp(e) {
 
+    /**/
+    let charCode = (e.which) ? e.which : event.keyCode;
+    console.log("KeyCode: "+charCode);
+    if (charCode >= 96 && charCode <= 106 )
+        console.log("Numlock number detected: "+charCode);
+    /**/
+
     let inputElement = document.getElementById("main-input");
+
+    let msg = {
+        // message: inputElement.value,
+        message: '',
+        name: user.email,
+        uuid: user.uuid
+    };
 
     if (e.key === 'Enter' && e.keyCode === 13) {
         // call your function to do the thing
@@ -99,21 +113,53 @@ function onEnterKeyUp(e) {
         console.log('user');
         console.log(user.uuid);
 
-        let msg = {
-            message: inputElement.value,
-            name: user.email,
-            uuid: user.uuid
-        };
+        // let msg = {
+        //     message: inputElement.value,
+        //     name: user.email,
+        //     uuid: user.uuid
+        // };
 
-        websocket.send(JSON.stringify(msg));
+        msg.message = inputElement.value;
+
+        // websocket.send(JSON.stringify(msg));
         inputElement.value = "";
     }
+
+    //numpad 8
+    if (e.keyCode === 38 || e.keyCode === 104) {
+
+        console.log(e);
+
+        msg.message = 'north';
+
+        // websocket.send(JSON.stringify(msg));
+        // inputElement.value = "";
+    }
+
+    //numpad 6
+    if (e.keyCode === 39 || e.keyCode === 102) {
+
+        console.log(e);
+
+        msg.message = 'east';
+
+        // websocket.send(JSON.stringify(msg));
+        // inputElement.value = "";
+    }
+
+    websocket.send(JSON.stringify(msg));
+
 }
 
 // register the handler
 document.addEventListener('keyup', onEnterKeyUp, false);
 
-//test backup0217
+
+document.onkeydown = function (e) {
+    if (e.which >= 96 && e.which <= 105) {
+        return false;
+    }
+}
 
 /**/
 // websocket.onmessage = function (ev) {
