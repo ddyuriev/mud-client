@@ -148,7 +148,6 @@ function onEnterKeyUp(e) {
     }
 
     websocket.send(JSON.stringify(msg));
-
 }
 
 // register the handler
