@@ -143,6 +143,7 @@ function onEnterKeyUp(e) {
         // inputElement.value = "";
     }
 
+    
     //numpad 6
     if (e.keyCode === 39 || e.keyCode === 102) {
 
