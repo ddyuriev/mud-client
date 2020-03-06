@@ -7,8 +7,6 @@ let secondIteration = 0;
 
 let gameProcess = '';
 
-let otladka = 0;
-
 function convertRemToPixels(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
@@ -134,36 +132,26 @@ function onEnterKeyUp(e) {
 
     //numpad 8
     if (e.keyCode === 38 || e.keyCode === 104) {
-
-        console.log(e);
-
+        // console.log(e);
         msg.message = 'north';
-
-        // websocket.send(JSON.stringify(msg));
-        // inputElement.value = "";
     }
-
     
     //numpad 6
     if (e.keyCode === 39 || e.keyCode === 102) {
-
-        console.log(e);
-
+        // console.log(e);
         msg.message = 'east';
+    }
 
-        // websocket.send(JSON.stringify(msg));
-        // inputElement.value = "";
+    //numpad 2
+    if (e.keyCode === 40 || e.keyCode === 98) {
+        // console.log(e);
+        msg.message = 'south';
     }
 
     //numpad 4
     if (e.keyCode === 37 || e.keyCode === 100) {
-
-        console.log(e);
-
+        // console.log(e);
         msg.message = 'west';
-
-        // websocket.send(JSON.stringify(msg));
-        // inputElement.value = "";
     }
 
     websocket.send(JSON.stringify(msg));
@@ -171,7 +159,6 @@ function onEnterKeyUp(e) {
 
 // register the handler
 document.addEventListener('keyup', onEnterKeyUp, false);
-
 
 document.onkeydown = function (e) {
     if (e.which >= 96 && e.which <= 105) {
@@ -197,10 +184,6 @@ document.onkeydown = function (e) {
 
 const xhrGetProfile = async function (bearer) {
 
-    // console.log('###############otladka0:');
-    // console.log(otladka);
-    // otladka++;
-
     const fetchResponse = await fetch(
         url + bearer)
         .then(response => response.json())
@@ -211,10 +194,6 @@ const xhrGetProfile = async function (bearer) {
 
     //базовый случай, когда токен принят сразу
     if (fetchResponse && fetchResponse.hasOwnProperty("user")) {
-
-        // console.log('###############otladka1:');
-        // console.log(otladka);
-        // otladka++;
 
         // console.log('случай удачного подключения - присваеваем user:');
         user = fetchResponse.user;
@@ -269,17 +248,10 @@ if (bearer) {
         });
     // .finally(function () {
     //     console.log('блок finally: ');
-    //     console.log('###############otladka-2-finally:');
-    //     console.log(otladka);
-    //     otladka++;
     //
     //     if (!isEmptyObject(user) && secondIteration === 1){
     //
     //         console.log('finally-got-user:');
-    //
-    //         console.log('###############otladka-3-finally:');
-    //         console.log(otladka);
-    //         otladka++;
     //
     //         newWebSocketConnection(user);
     //     }
