@@ -111,50 +111,80 @@ function onEnterKeyUp(e) {
         uuid: user.uuid
     };
 
-    if (e.key === 'Enter' && e.keyCode === 13) {
-        // call your function to do the thing
-        console.log('enter pressed');
+    // if (e.key === 'Enter' && e.keyCode === 13) {
+    //     // call your function to do the thing
+    //     console.log('enter pressed');
+    //
+    //     console.log('user');
+    //     console.log(user.uuid);
+    //
+    //     msg.message = inputElement.value;
+    //
+    //     inputElement.value = "";
+    // }
+    //
+    // //numpad 8
+    // if (e.keyCode === 38 || e.keyCode === 104) {
+    //     // console.log(e);
+    //     msg.message = 'north';
+    // }
+    //
+    // //numpad 6
+    // if (e.keyCode === 39 || e.keyCode === 102) {
+    //     // console.log(e);
+    //     msg.message = 'east';
+    // }
+    //
+    // //numpad 2
+    // if (e.keyCode === 40 || e.keyCode === 98) {
+    //     // console.log(e);
+    //     msg.message = 'south';
+    // }
+    //
+    // //numpad 4
+    // if (e.keyCode === 37 || e.keyCode === 100) {
+    //     // console.log(e);
+    //     msg.message = 'west';
+    // }
+    // websocket.send(JSON.stringify(msg));
 
-        console.log('user');
-        console.log(user.uuid);
 
-        // let msg = {
-        //     message: inputElement.value,
-        //     name: user.email,
-        //     uuid: user.uuid
-        // };
+    /**/
+    switch (e.keyCode) {
+        //enter
+        case 13:
+            msg.message = inputElement.value;
+            inputElement.value = "";
+            break;
 
-        msg.message = inputElement.value;
-
-        // websocket.send(JSON.stringify(msg));
-        inputElement.value = "";
+        //numpad 8
+        case 38:
+        case 104:
+            msg.message = 'north';
+            break;
+        //numpad 6
+        case 39:
+        case 102:
+            msg.message = 'east';
+            break;
+        //numpad 2
+        case 40:
+        case 98:
+            msg.message = 'south';
+            break;
+        //numpad 4
+        case 37:
+        case 100:
+            msg.message = 'west';
+            break;
     }
 
-    //numpad 8
-    if (e.keyCode === 38 || e.keyCode === 104) {
-        // console.log(e);
-        msg.message = 'north';
+    if (msg.message) {
+        websocket.send(JSON.stringify(msg));
     }
-    
-    //numpad 6
-    if (e.keyCode === 39 || e.keyCode === 102) {
-        // console.log(e);
-        msg.message = 'east';
-    }
+    /**/
 
-    //numpad 2
-    if (e.keyCode === 40 || e.keyCode === 98) {
-        // console.log(e);
-        msg.message = 'south';
-    }
 
-    //numpad 4
-    if (e.keyCode === 37 || e.keyCode === 100) {
-        // console.log(e);
-        msg.message = 'west';
-    }
-
-    websocket.send(JSON.stringify(msg));
 }
 
 // register the handler
