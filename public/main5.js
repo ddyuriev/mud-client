@@ -23,7 +23,7 @@ function newWebSocketConnection(user) {
     if (user.at_home) {
         websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     } else {
-        websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
+        websocket = new WebSocket("ws://192.168.215.37:8000/?user=" + user.email);
     }
 
     /**/
