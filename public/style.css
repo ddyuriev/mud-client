@@ -13,8 +13,16 @@ main {
 
 #second-row {
     /*background-color: green;*/
-    /*background-color: green;*/
+    /*background-color: black;*/
 }
+
+/**/
+#second-row .full-height{
+    /*background-color: black;*/
+}
+/**/
+
+
 
 /*textarea {*/
 /*height: 100%;*/
