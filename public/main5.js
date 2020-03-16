@@ -41,8 +41,8 @@ function newWebSocketConnection(user) {
         var utime = msg.time;
 
 
-        console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
-        console.log(msg);
+        // console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
+        // console.log(msg);
 
         // console.log('msg key:');
         // console.log(Object.keys(msg)[0]);
@@ -96,6 +96,10 @@ function newWebSocketConnection(user) {
 function onEnterKeyUp(e) {
 
     /**/
+
+    // console.log("e:");
+    // console.log(e);
+
     // let charCode = (e.which) ? e.which : event.keyCode;
     // console.log("KeyCode: " + charCode);
     // if (charCode >= 96 && charCode <= 106)
@@ -150,34 +154,41 @@ function onEnterKeyUp(e) {
 
 
     /**/
-    switch (e.keyCode) {
-        //enter
-        case 13:
-            msg.message = inputElement.value;
-            inputElement.value = "";
-            break;
+    //костыли для обычных стрелочек
+    const arrowsKeysList = ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'];
+    if (arrowsKeysList.includes(e.code)) {
+        e.keyCode = null;
+    } else {
+        switch (e.keyCode) {
+            //enter
+            case 13:
+                msg.message = inputElement.value;
+                inputElement.value = "";
+                break;
 
-        //numpad 8
-        case 38:
-        case 104:
-            msg.message = 'north';
-            break;
-        //numpad 6
-        case 39:
-        case 102:
-            msg.message = 'east';
-            break;
-        //numpad 2
-        case 40:
-        case 98:
-            msg.message = 'south';
-            break;
-        //numpad 4
-        case 37:
-        case 100:
-            msg.message = 'west';
-            break;
+            //numpad 8
+            case 38:
+            case 104:
+                msg.message = 'north';
+                break;
+            //numpad 6
+            case 39:
+            case 102:
+                msg.message = 'east';
+                break;
+            //numpad 2
+            case 40:
+            case 98:
+                msg.message = 'south';
+                break;
+            //numpad 4
+            case 37:
+            case 100:
+                msg.message = 'west';
+                break;
+        }
     }
+
 
     if (msg.message) {
         websocket.send(JSON.stringify(msg));
