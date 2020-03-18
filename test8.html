@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="public/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+
+    <script language="JavaScript" type="text/javascript">
+    </script>
+
+    <style>
+        /*#main-panel-text-finally {*/
+            /*display: flex;*/
+            /*flex-direction: column-reverse;*/
+        /*}*/
+        /*#main-panel-text-finally div {*/
+            /*float: left;*/
+        /*}*/
+    </style>
+</head>
+
+
+<main id="main-container" class="container d-flex h-100 flex-column">
+
+    <div class="flex-grow-1" id="second-row">
+
+        <div class="card full-height">
+            <div class="card-body" id="main-panel">
+
+                <div id="main-panel-text">
+
+                    <div id="main-panel-text-finally" style="overflow-y: auto; /*height:150px;*/  /*height:100%;*/">
+
+                        <span>
+Аккaунт [therion@mail.ru] Персонаж [Тэрион]<br>
+Добро пожаловать в MUD!<br>
+0) Выход из MUDа.<br>
+1) Начать игру.<br>
+2) Ввести описание своего персонажа.<br>
+3) Прочитать начальную историю.<br>
+4) Поменять пароль.<br>
+5) Удалить этого персонажа.<br>
+--------------------------------<br>
+В этом аккаунте вы также можете:<br>
+6) Выбрать другого персонажа.<br>
+7) Создать нового персонажа.<br>
+8) Другие операции с аккаунтом.
+</span>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="input-group mb-1 mt-1">
+        <input id="main-input" type="text" class="form-control" placeholder="type text..." aria-label="type text..."
+               aria-describedby="button-addon2" onblur="this.focus()" autofocus>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="send-main">send</button>
+        </div>
+    </div>
+</main>
+
+</html>

@@ -10,21 +10,21 @@ let gameProcess = '';
 
 
 /**/
-// let head = document.getElementsByTagName('HEAD')[0];
-// // Create new link Element
-// let link = document.createElement('link');
-// // set the attributes for link element
-// link.rel = 'stylesheet';
-// link.type = 'text/css';
-// let colorScheme = localStorage.getItem('colorScheme');
-// link.href = 'public/style.css';
-// link.href = colorScheme === 100 ? 'public/style.css' : 'public/style2.css';
-// // Append link element to HTML head
-// head.appendChild(link);
+let head = document.getElementsByTagName('HEAD')[0];
+// Create new link Element
+let link = document.createElement('link');
+// set the attributes for link element
+link.rel = 'stylesheet';
+link.type = 'text/css';
+let colorScheme = localStorage.getItem('colorScheme');
+link.href = 'public/style.css';
+link.href = colorScheme === 100 ? 'public/style.css' : 'public/style2.css';
+// Append link element to HTML head
+head.appendChild(link);
 /**/
 
 /**/
-// window.localStorage.setItem('colorScheme', 100);
+window.localStorage.setItem('colorScheme', 100);
 // let colorScheme = localStorage.getItem('colorScheme');
 
 // console.log('------------------colorScheme:');
@@ -60,10 +60,10 @@ function newWebSocketConnection(user) {
 
     websocket.onmessage = function (ev) {
 
-        var msg   = JSON.parse(ev.data);
-        var umsg  = msg.message;
-        var uname = msg.name;
-        var utime = msg.time;
+        let msg   = JSON.parse(ev.data);
+        let umsg  = msg.message;
+        let uname = msg.name;
+        let utime = msg.time;
 
 
         // console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
@@ -374,7 +374,6 @@ $(document).on("click", "#send-main", function (event) {
     let message = {
         user: user,
     };
-    // websocket.send(JSON.stringify(message));
 
     let values = ['wwwww', 'asdasdasd'];
 
