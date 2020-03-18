@@ -1,11 +1,36 @@
-let bearer = localStorage.getItem("token");
+let bearer              = localStorage.getItem("token");
 // let url                 = `http://mud-back/api/profile?token=`;
-let url = 'http://mud-back/api/profile?token=';
-let user = {};
+let url                 = 'http://mud-back/api/profile?token=';
+let user                = {};
 let xhrGetProfileResult = 0;
-let secondIteration = 0;
+let secondIteration     = 0;
 
 let gameProcess = '';
+
+
+
+/**/
+// let head = document.getElementsByTagName('HEAD')[0];
+// // Create new link Element
+// let link = document.createElement('link');
+// // set the attributes for link element
+// link.rel = 'stylesheet';
+// link.type = 'text/css';
+// let colorScheme = localStorage.getItem('colorScheme');
+// link.href = 'public/style.css';
+// link.href = colorScheme === 100 ? 'public/style.css' : 'public/style2.css';
+// // Append link element to HTML head
+// head.appendChild(link);
+/**/
+
+/**/
+// window.localStorage.setItem('colorScheme', 100);
+// let colorScheme = localStorage.getItem('colorScheme');
+
+// console.log('------------------colorScheme:');
+// console.log(colorScheme);
+
+/**/
 
 function convertRemToPixels(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -21,9 +46,9 @@ function newWebSocketConnection(user) {
     // websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email);
     // websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
     if (user.at_home) {
-        websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
+        websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email + "&color=" + user.color_scheme);
     } else {
-        websocket = new WebSocket("ws://192.168.215.37:8000/?user=" + user.email);
+        websocket = new WebSocket("ws://192.168.215.37:8000/?user=" + user.email + "&color=" + user.color_scheme);
     }
 
     /**/
@@ -35,8 +60,8 @@ function newWebSocketConnection(user) {
 
     websocket.onmessage = function (ev) {
 
-        var msg = JSON.parse(ev.data);
-        var umsg = msg.message;
+        var msg   = JSON.parse(ev.data);
+        var umsg  = msg.message;
         var uname = msg.name;
         var utime = msg.time;
 
@@ -111,8 +136,8 @@ function onEnterKeyUp(e) {
     let msg = {
         // message: inputElement.value,
         message: '',
-        name: user.email,
-        uuid: user.uuid
+        name   : user.email,
+        uuid   : user.uuid
     };
 
     // if (e.key === 'Enter' && e.keyCode === 13) {
@@ -162,7 +187,7 @@ function onEnterKeyUp(e) {
         switch (e.keyCode) {
             //enter
             case 13:
-                msg.message = inputElement.value;
+                msg.message        = inputElement.value;
                 inputElement.value = "";
                 break;
 
@@ -307,6 +332,11 @@ if (bearer) {
 
 $(document).ready(function () {
 
+    /**/
+    console.log('main-container HEIGHT:');
+    console.log($('#main-container').height());
+    /**/
+
     // console.log($('#second-row').height());
     // console.log($('#main-panel-text div').height());
 
@@ -315,13 +345,22 @@ $(document).ready(function () {
 
     // $('#main-panel-text div').height(height - 100);
     // $('#main-panel-text div').height(height - 50);
+    //OK!!!
     $('#main-panel-text div').height(height);
+
+    console.log('height:');
+    console.log(height);
 
     //пошел коннект к сокет-серверу
     // if (!isEmptyObject(user)) {
     //     console.log('___________________________user !empty');
     //     console.log(user);
     // }
+
+/**/
+    console.log('window.height()');
+    console.log(window.innerHeight);
+/**/
 
 });
 
@@ -340,12 +379,12 @@ $(document).on("click", "#send-main", function (event) {
     let values = ['wwwww', 'asdasdasd'];
 
     $.ajax({
-        url: "http://mud-back/userinput",
-        type: "post",
+        url    : "http://mud-back/userinput",
+        type   : "post",
         // data   : values,
         // data   : {info: values},
         // data   : {values},
-        data: {'a': 'wwwww', 'b': 'asdasdasd'},
+        data   : {'a': 'wwwww', 'b': 'asdasdasd'},
         success: function (response) {
 
             // You will get response from your PHP page (what you echo or print)
