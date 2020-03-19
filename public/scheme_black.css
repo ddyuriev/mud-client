@@ -1,0 +1,81 @@
+/**
+темная цветовая схема
+ */
+
+
+body {
+    background-color: black;
+}
+
+#main-panel-text {
+    background-color: black;
+}
+
+#second-row .card {
+    background-color: black;
+}
+
+/*.white-room-name {*/
+/*color: #4b0082;*/
+/*}*/
+/*.dark-room-name {*/
+/*color: #00FFFF;*/
+/*}*/
+
+
+.basic-color {
+    color: #C0C0C0;
+}
+
+.room-name {
+    color: aqua;
+}
+
+.mobile-title {
+    color: red;
+}
+
+.health-good {
+    color: green;
+}
+
+.white-color {
+    color: white;
+}
+
+.actor-attack {
+    color: yellow;
+}
+
+.equipment {
+    color: #C0C0C0;
+}
+
+.enemy-attack {
+    color: red;
+}
+
+
+
+/*-------start scroll-bar customizing-------*/
+#main-panel-text-finally::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#main-panel-text-finally::-webkit-scrollbar
+{
+    width: 12px;
+    /*background-color: #F5F5F5;*/
+    background-color: black;
+}
+
+#main-panel-text-finally::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+/*-------end scroll-bar customizing-------*/

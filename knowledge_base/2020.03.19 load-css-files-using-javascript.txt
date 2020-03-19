@@ -1,0 +1,13 @@
+/**/
+let head = document.getElementsByTagName('HEAD')[0];
+// Create new link Element
+let link = document.createElement('link');
+// set the attributes for link element
+link.rel = 'stylesheet';
+link.type = 'text/css';
+let colorScheme = localStorage.getItem('colorScheme');
+link.href = 'public/style.css';
+link.href = colorScheme === 2 ? 'public/scheme_white.css' : 'public/scheme_black.css';
+// Append link element to HTML head
+head.appendChild(link);
+/**/

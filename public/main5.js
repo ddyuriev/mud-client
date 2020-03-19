@@ -18,13 +18,13 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 let colorScheme = localStorage.getItem('colorScheme');
 link.href = 'public/style.css';
-link.href = colorScheme === 100 ? 'public/style.css' : 'public/style2.css';
+link.href = colorScheme === 2 ? 'public/scheme_white.css' : 'public/scheme_black.css';
 // Append link element to HTML head
 head.appendChild(link);
 /**/
 
 /**/
-window.localStorage.setItem('colorScheme', 100);
+window.localStorage.setItem('colorScheme', 1);
 // let colorScheme = localStorage.getItem('colorScheme');
 
 // console.log('------------------colorScheme:');
@@ -346,7 +346,8 @@ $(document).ready(function () {
     // $('#main-panel-text div').height(height - 100);
     // $('#main-panel-text div').height(height - 50);
     //OK!!!
-    $('#main-panel-text div').height(height);
+    // $('#main-panel-text div').height(height);
+    $('#main-panel-text-finally').height(height);
 
     console.log('height:');
     console.log(height);

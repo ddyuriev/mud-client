@@ -2,16 +2,6 @@ html {
     height: 100%;
 }
 
-
-/**/
-/*.container {*/
-    /*!*height: auto!important;*!*/
-/*}*/
-/*#main-panel {*/
-    /*height: auto;*/
-/*}*/
-/**/
-
 body {
     /*background-color: lightblue;*/
     height: 100%;
@@ -132,29 +122,4 @@ a{
 .form-control:focus {
     border-color: #28a745;
     box-shadow: 0 0 0 0.1rem rgba(40, 167, 69, 0.1);
-}
-
-
-/*start -----------светлая цветовая схема*/
-
-.white-room-name {
-    color: #4b0082;
-}
-
-
-.dark-room-name {
-    color: #00FFFF;
-}
-
-/*end -----------светлая цветовая схема*/
-
-
-/*-----------пытаюсь сделать высоту блока без js костылей*/
-
-/*#main-panel {*/
-    /*display: flex;*/
-/*}*/
-#main-panel-text {
-    /*display: flex;*/
-    /*height: 100%;*/
 }
