@@ -66,8 +66,8 @@ function newWebSocketConnection(user) {
         let utime = msg.time;
 
 
-        // console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
-        // console.log(msg);
+        console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
+        console.log(msg);
 
         // console.log('msg key:');
         // console.log(Object.keys(msg)[0]);
@@ -187,7 +187,8 @@ function onEnterKeyUp(e) {
         switch (e.keyCode) {
             //enter
             case 13:
-                msg.message        = inputElement.value;
+                // msg.message        = inputElement.value;
+                msg.message        = inputElement.value ? inputElement.value : 'empty_string';
                 inputElement.value = "";
                 break;
 
@@ -333,8 +334,8 @@ if (bearer) {
 $(document).ready(function () {
 
     /**/
-    console.log('main-container HEIGHT:');
-    console.log($('#main-container').height());
+    // console.log('main-container HEIGHT:');
+    // console.log($('#main-container').height());
     /**/
 
     // console.log($('#second-row').height());
@@ -349,8 +350,8 @@ $(document).ready(function () {
     // $('#main-panel-text div').height(height);
     $('#main-panel-text-finally').height(height);
 
-    console.log('height:');
-    console.log(height);
+    // console.log('height:');
+    // console.log(height);
 
     //пошел коннект к сокет-серверу
     // if (!isEmptyObject(user)) {
@@ -359,8 +360,8 @@ $(document).ready(function () {
     // }
 
 /**/
-    console.log('window.height()');
-    console.log(window.innerHeight);
+    // console.log('window.height()');
+    // console.log(window.innerHeight);
 /**/
 
 });

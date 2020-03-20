@@ -11,3 +11,8 @@ link.href = colorScheme === 2 ? 'public/scheme_white.css' : 'public/scheme_black
 // Append link element to HTML head
 head.appendChild(link);
 /**/
+
+
+
+javascript load stylesheet dynamically
+https://www.geeksforgeeks.org/how-to-load-css-files-using-javascript/
