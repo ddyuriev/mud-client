@@ -1,5 +1,4 @@
 let bearer              = localStorage.getItem("token");
-// let url                 = `http://mud-back/api/profile?token=`;
 let url                 = 'http://mud-back/api/profile?token=';
 let user                = {};
 let xhrGetProfileResult = 0;
@@ -140,45 +139,6 @@ function onEnterKeyUp(e) {
         uuid   : user.uuid
     };
 
-    // if (e.key === 'Enter' && e.keyCode === 13) {
-    //     // call your function to do the thing
-    //     console.log('enter pressed');
-    //
-    //     console.log('user');
-    //     console.log(user.uuid);
-    //
-    //     msg.message = inputElement.value;
-    //
-    //     inputElement.value = "";
-    // }
-    //
-    // //numpad 8
-    // if (e.keyCode === 38 || e.keyCode === 104) {
-    //     // console.log(e);
-    //     msg.message = 'north';
-    // }
-    //
-    // //numpad 6
-    // if (e.keyCode === 39 || e.keyCode === 102) {
-    //     // console.log(e);
-    //     msg.message = 'east';
-    // }
-    //
-    // //numpad 2
-    // if (e.keyCode === 40 || e.keyCode === 98) {
-    //     // console.log(e);
-    //     msg.message = 'south';
-    // }
-    //
-    // //numpad 4
-    // if (e.keyCode === 37 || e.keyCode === 100) {
-    //     // console.log(e);
-    //     msg.message = 'west';
-    // }
-    // websocket.send(JSON.stringify(msg));
-
-
-    /**/
     //костыли для обычных стрелочек
     const arrowsKeysList = ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'];
     if (arrowsKeysList.includes(e.code)) {
@@ -219,8 +179,6 @@ function onEnterKeyUp(e) {
     if (msg.message) {
         websocket.send(JSON.stringify(msg));
     }
-    /**/
-
 
 }
 
@@ -232,22 +190,6 @@ document.onkeydown = function (e) {
         return false;
     }
 };
-
-/**/
-// websocket.onmessage = function (ev) {
-//
-//     var msg   = JSON.parse(ev.data);
-//     var umsg  = msg.message;
-//     var uname = msg.name;
-//     var utime = msg.time;
-//
-//
-//     console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
-//     console.log(ev.data);
-// };
-
-
-/**/
 
 const xhrGetProfile = async function (bearer) {
 

@@ -55,6 +55,10 @@ body {
     color: red;
 }
 
+.health-bad {
+    color: darkred;
+}
+
 
 
 /*-------start scroll-bar customizing-------*/
