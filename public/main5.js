@@ -65,8 +65,8 @@ function newWebSocketConnection(user) {
         let utime = msg.time;
 
 
-        console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
-        console.log(msg);
+        // console.log('*!*!*!*!*!*!*!onmessage*!*!*!*!*!*!*!');
+        // console.log(msg);
 
         // console.log('msg key:');
         // console.log(Object.keys(msg)[0]);
