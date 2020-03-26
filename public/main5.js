@@ -121,8 +121,8 @@ function onEnterKeyUp(e) {
 
     /**/
 
-    // console.log("e:");
-    // console.log(e);
+    console.log("e:");
+    console.log(e);
 
     // let charCode = (e.which) ? e.which : event.keyCode;
     // console.log("KeyCode: " + charCode);
@@ -172,6 +172,17 @@ function onEnterKeyUp(e) {
             case 100:
                 msg.message = 'west';
                 break;
+            //numpad 9
+            case 33:
+            case 105:
+                msg.message = 'up';
+                break;
+            //numpad 3
+            case 34:
+            case 99:
+                msg.message = 'down';
+                break;
+
         }
     }
 
