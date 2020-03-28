@@ -121,8 +121,8 @@ function onEnterKeyUp(e) {
 
     /**/
 
-    console.log("e:");
-    console.log(e);
+    // console.log("e:");
+    // console.log(e);
 
     // let charCode = (e.which) ? e.which : event.keyCode;
     // console.log("KeyCode: " + charCode);
