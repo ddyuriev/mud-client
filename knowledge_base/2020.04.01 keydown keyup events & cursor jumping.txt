@@ -1,0 +1,52 @@
+Получилось победить перепрыгивание курсора при листании истории стрелочками
+Проблема была в навешивании на событие
+
+// register the handler
+document.addEventListener('keyup', onEnterKeyUp, false);
+document.addEventListener('keydown', onEnterKeyUp, false);
+
+События keydown и keyup
+Событие keydown происходит при нажатии клавиши, а keyup – при отпускании.
+
+так ок:
+document.addEventListener('keydown', onEnterKeyUp, false);
+
+---------------------------------------------------------------------------------------------------------
+
+<input id="main-input" type="text" class="form-control" placeholder="type text..." aria-label="type text..."
+               aria-describedby="button-addon2" onblur="this.focus()" autofocus>
+
+------------------------------
+
+Сначала получилось так:
+
+
+let getInputHistoryHandler = function (e) {
+    if (e.code.localeCompare('ArrowUp') === 0 && e.keyCode === 38) {
+        getInputHistory(inputHistory);
+        this.value = inputHistory[0];
+        e.preventDefault();
+    }
+};
+
+$(document).ready(function () {
+document.getElementById('main-input').addEventListener('keydown', getInputHistoryHandler, false);
+
+---Потом вообще отлично---:
+
+function onEnterKeyUp(e) {
+...
+    switch (true) {
+...
+
+        //arrowUp
+        case e.code.localeCompare('ArrowUp') === 0 && e.keyCode === 38:
+            e.preventDefault();
+            getInputHistory(inputHistory);
+            inputElement.value = inputHistory[0];
+            break;
+
+document.addEventListener('keydown', onEnterKeyUp, false);
+
+
+

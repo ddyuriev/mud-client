@@ -5,13 +5,40 @@
     <title>flex-direction</title>
 
     <script language="JavaScript" type="text/javascript">
-        function addHtml() {
-            let innerHTML = document.getElementById('main-panel-text-finally').innerHTML;
-            // let newEl = 'Adding more content here' + +  new Date() + '<br>';
-            // let newEl = 'Adding more content here' + new Date().getSeconds() + new Date().getMilliseconds() + '<br>';
-            let newEl = '<li style="color:green">Adding more content here :)' +  new Date().getSeconds() + '.' + new Date().getMilliseconds() + '</li>';
-            document.getElementById('main-panel-text-finally').innerHTML = innerHTML + newEl;
-        }
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+            let ignoreKey = false;
+            let handler = function (e) {
+                if (ignoreKey) {
+                    e.preventDefault();
+                    return;
+                }
+                if (e.keyCode == 38 || e.keyCode == 40) {
+                    let pos = this.selectionStart;
+                    // console.log("pos");
+                    // console.log(pos);
+                    this.value = (e.keyCode == 38 ? 1 : -1) + parseInt(this.value, 10);
+                    this.selectionStart = pos;
+                    // console.log("this.selectionStart");
+                    // console.log(this.selectionStart);
+                    this.selectionEnd = pos;
+                    // console.log("this.selectionEnd");
+                    // console.log(this.selectionEnd);
+
+                    ignoreKey = true;
+                    setTimeout(function () {
+                        ignoreKey = false
+                    }, 1);
+                    e.preventDefault();
+                }
+            };
+
+            document.getElementById('main-input').addEventListener('keydown', handler, false);
+            // document.getElementById('main-input').addEventListener('keypress', handler, false);
+        })
+
+
     </script>
 
     <style>
@@ -25,12 +52,11 @@
     </style>
 </head>
 <body>
-<ul id="main-panel-text-finally" class="flex-row">
-    <li><img src="thumb1.jpg" alt=""></li>
-    <li><img src="thumb2.jpg" alt=""></li>
-    <li><img src="thumb3.jpg" alt=""></li>
-</ul>
 
-<button class="btn btn-outline-secondary" type="button" id="send-main" onclick="addHtml()">send</button>
+<!--<input id="main-input" type="text" class="form-control" placeholder="type text..." aria-label="type text..."-->
+<!--aria-describedby="button-addon2" onblur="this.focus()" autofocus>-->
+
+<input id="main-input" type="text" class="form-control" placeholder="type text..." aria-label="type text..."
+       aria-describedby="button-addon2">
 
 </body>

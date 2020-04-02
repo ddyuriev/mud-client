@@ -1,0 +1,34 @@
+
+есть элемент с автофокусом
+<input id="main-input" type="text" class="form-control" placeholder="type text..."
+    aria-label="type text..." aria-describedby="button-addon2" onblur="this.focus()" autofocus>
+
+делаю трюк:
+когда выделяется текст, но до отпускания мыши автофокус с элемента удаляется.
+потом возвращается
+
+    let card = document.getElementsByTagName('body')[0];
+    card.onmousedown = function(e) {
+        $('#main-input').removeAttr('onblur');
+    };
+    card.onmouseup = function(e) {
+        $('#main-input').attr('onblur',function() {
+            $('#main-input').focus();
+        });
+
+    };
+
+надо это переделать на чистый js.
+так лучше:
+    let input = document.getElementById("main-input");
+
+    card.onmousedown = function(e) {
+        console.log("КЛИК!!!!!!!!onmousedown");
+        // $('#main-input').removeAttr('onblur');
+        input.removeAttribute('onblur');
+    };
+
+    card.onmouseup = function(e) {
+        console.log("КЛИК!!!!!!!!onmouseup");
+        input.setAttribute('onblur', input.focus());
+    };
