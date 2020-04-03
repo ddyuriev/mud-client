@@ -1,0 +1,19 @@
+При перемещении по клавиатуре numpad вместе с действием перемещение добавлялись функции по умолчанию
+при нажатом numlock в инпут вводилась цифра, при отключенном курсор перемещался( для 4 и 6)
+сначала решил это так:
+
+//это костыли чтобы клавиши numpad не вводили цифры
+ document.onkeydown = function (e) {
+     if (e.which >= 96 && e.which <= 105) {
+         return false;
+     }
+ };
+
+потом сообразил:
+
+        //numpad 8
+        case e.code.localeCompare('Numpad8') === 0 && (e.keyCode === 38 || e.keyCode === 104):
+            //это чтобы клавиши numpad не вводили цифры
+            e.preventDefault();
+            msg.message = 'north';
+            break;

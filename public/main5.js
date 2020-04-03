@@ -11,6 +11,8 @@ let secondIteration = 0;
 //?
 let gameProcess = '';
 
+let inputElement;
+
 let inputHistory = [];
 let inputHistoryAux = [];
 let isInputHistoryReading = 0;
@@ -35,11 +37,6 @@ head.appendChild(link);
 
 
 /**/
-//не катит
-// let input = document.getElementById("main-input");
-/**/
-
-/**/
 window.localStorage.setItem('colorScheme', 1);
 // let colorScheme = localStorage.getItem('colorScheme');
 
@@ -60,35 +57,15 @@ function isEmptyArray(array) {
     return !(typeof array !== 'undefined' && array.length > 0);
 }
 
-// function addToHistoryArray(historyArray, value) {
-//     if (historyArray.length >= 7) {
-//         historyArray.shift();
-//     }
-//     historyArray.push(value);
-//     return historyArray;
-// }
-
 function addToHistoryArray(value) {
-    //если новое значение равно последнему в массиве, игнор
-    // if (inputHistory[inputHistory.length - 1] !== value) {
-    //     if (inputHistory.length >= INPUT_HISTORY_LENGTH) {
-    //         inputHistory.shift();
-    //     }
-    //     inputHistory.push(value);
-    // }
-
-
     let key = inputHistory.indexOf(value);
     //found
     if (key !== -1) {
         inputHistory.splice(key, 1);
-    } else if (inputHistory.length >= INPUT_HISTORY_LENGTH){
+    } else if (inputHistory.length >= INPUT_HISTORY_LENGTH) {
         inputHistory.shift();
     }
     inputHistory.push(value);
-
-    console.log('------------------inputHistory:');
-    console.log(inputHistory);
 }
 
 
@@ -96,21 +73,8 @@ function getInputHistory(direction) {
     // это для того, чтобы не листать от пустой строки ввода
     isInputHistoryReading = 1;
 
-    // if (direction === INPUT_HISTORY_UP) {
-    //     //pop() method removes the last element of an array, and returns that element.
-    //     let lastElem = inputHistory.pop();
-    //     //Add new items to the beginning of an array:
-    //     inputHistory.unshift(lastElem);
-    // } else {
-    //     //Remove the first item of an array. The return value of the shift method is the removed item
-    //     let lastElem = inputHistory.shift();
-    //     //push() method adds new items to the end of an array, and returns the new length.
-    //     inputHistory.push(lastElem);
-    // }
-
     inputHistoryAux = inputHistory;
     if (direction === INPUT_HISTORY_UP) {
-
         let lastElem = inputHistoryAux.pop();
         //Add new items to the beginning of an array:
         inputHistoryAux.unshift(lastElem);
@@ -133,9 +97,6 @@ function newWebSocketConnection(user) {
     } else {
         websocket = new WebSocket("ws://192.168.215.37:8000/?user=" + user.email + "&color=" + user.color_scheme);
     }
-
-    /**/
-
 
     websocket.onopen = function (ev) {
         console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
@@ -188,7 +149,8 @@ function newWebSocketConnection(user) {
 
                 // document.getElementById('main-panel-text-finally').innerHTML = msg[messageKey] + innerHTML;
                 // document.getElementById('main-panel-text-finally-span').innerHTML = msg[messageKey] + innerHTML;
-                document.getElementById('main-panel-text-finally-span').innerHTML = innerHTML + msg[messageKey];
+                // document.getElementById('main-panel-text-finally-span').innerHTML = innerHTML + msg[messageKey];
+                document.getElementById('main-text').innerHTML = innerHTML + msg[messageKey];
 
                 break;
             case 1:
@@ -196,7 +158,6 @@ function newWebSocketConnection(user) {
                 ajaxLogin();
                 break;
         }
-
 
     };
 }
@@ -228,17 +189,13 @@ function newWebSocketConnection(user) {
 function onEnterKeyUp(e) {
 
     /**/
-
+    //todo сделать return для букв, чтобы быстрее
     // console.log("e:");
     // console.log(e);
-
-    // let charCode = (e.which) ? e.which : event.keyCode;
-    // console.log("KeyCode: " + charCode);
-    // if (charCode >= 96 && charCode <= 106)
-    //     console.log("Numlock number detected: " + charCode);
     /**/
 
-    let inputElement = document.getElementById("main-input");
+    //пробуем
+    // let inputElement = document.getElementById("main-input");
 
     // console.log("onEnterKeyUp - inputElement");
     // console.log(inputElement);
@@ -258,11 +215,9 @@ function onEnterKeyUp(e) {
     //     console.log("КЛИК!!!!!!!!");
     //     alert( 'Ура!' );
     // };
-
     /**/
 
     let msg = {
-        // message: inputElement.value,
         message: '',
         name: user.email,
         uuid: user.uuid
@@ -271,47 +226,44 @@ function onEnterKeyUp(e) {
     switch (true) {
         //enter
         case e.keyCode === 13:
-            // msg.message = inputElement.value ? inputElement.value : 'empty_string';
-            // addToHistoryArray(inputHistory, inputElement.value);
-
             if (inputElement.value) {
                 msg.message = inputElement.value;
-
-                console.log('msg.message');
-                console.log(msg.message);
-
-                // addToHistoryArray(inputHistory, msg.message);
-                // addToHistoryArray(inputHistory, msg.message);
                 addToHistoryArray(msg.message);
                 isInputHistoryReading = 0;
             } else {
                 msg.message = 'empty_string';
             }
             inputElement.value = "";
-
             break;
         //numpad 8
         case e.code.localeCompare('Numpad8') === 0 && (e.keyCode === 38 || e.keyCode === 104):
+            //это чтобы клавиши numpad не вводили цифры
+            e.preventDefault();
             msg.message = 'north';
             break;
         //numpad 6
         case e.code.localeCompare('Numpad6') === 0 && (e.keyCode === 39 || e.keyCode === 102):
+            e.preventDefault();
             msg.message = 'east';
             break;
         //numpad 2
         case e.code.localeCompare('Numpad2') === 0 && (e.keyCode === 40 || e.keyCode === 98):
+            e.preventDefault();
             msg.message = 'south';
             break;
         //numpad 4
         case e.code.localeCompare('Numpad4') === 0 && (e.keyCode === 37 || e.keyCode === 100):
+            e.preventDefault();
             msg.message = 'west';
             break;
         //numpad 9
         case e.code.localeCompare('Numpad9') === 0 && (e.keyCode === 33 || e.keyCode === 105):
+            e.preventDefault();
             msg.message = 'up';
             break;
         //numpad 3
         case e.code.localeCompare('Numpad3') === 0 && (e.keyCode === 34 || e.keyCode === 99):
+            e.preventDefault();
             msg.message = 'down';
             break;
 
@@ -326,21 +278,12 @@ function onEnterKeyUp(e) {
 
         //arrowUp
         case e.code.localeCompare('ArrowUp') === 0 && e.keyCode === 38:
-
-            // console.log("this.value");
-            // console.log(this);
-            // console.log('inputHistory');
-            // console.log(inputHistory);
-
-            // getInputHistory(inputHistory);
-
             if (!isEmptyArray(inputHistory)) {
                 e.preventDefault();
                 getInputHistory(INPUT_HISTORY_UP);
                 inputElement.value = inputHistory[0];
             }
             break;
-
         //ArrowDown
         case e.code.localeCompare('ArrowDown') === 0 && e.keyCode === 40:
             if (!isEmptyArray(inputHistory) && isInputHistoryReading === 1) {
@@ -348,7 +291,6 @@ function onEnterKeyUp(e) {
                 getInputHistory(INPUT_HISTORY_DOWN);
                 inputElement.value = inputHistory[0];
             }
-
             break;
 
     }
@@ -361,34 +303,10 @@ function onEnterKeyUp(e) {
 
 }
 
-/**/
-// let getInputHistoryHandler = function (e) {
-//     if (e.code.localeCompare('ArrowUp') === 0 && e.keyCode === 38) {
-//         // console.log("this.value");
-//         // console.log(this.value);
-//         getInputHistory(inputHistory);
-//         // let input = document.getElementById("main-input");
-//         // input.value = inputHistory[0];
-//         this.value = inputHistory[0];
-//         e.preventDefault();
-//     }
-// };
-/**/
 
 // register the handler
-// document.addEventListener('keyup', onEnterKeyUp, false);
 document.addEventListener('keydown', onEnterKeyUp, false);
 
-/**/
-// document.getElementById('main-input').addEventListener('keydown', handler, false);
-/**/
-
-
-document.onkeydown = function (e) {
-    if (e.which >= 96 && e.which <= 105) {
-        return false;
-    }
-};
 
 const xhrGetProfile = async function (bearer) {
 
@@ -427,13 +345,11 @@ if (bearer) {
                         refreshedToken = xhrGetProfileResult.refreshed_token;
                         xhrGetProfile(refreshedToken).then(jsonXXX => {
                             // console.log('рефреш токена');
-                            // console.log('refreshedToken:');
-                            // console.log(refreshedToken);
                             localStorage.setItem("token", refreshedToken);
                             secondIteration = 1;
                         });
-
                         break;
+
                     //токен не парсится. Требуется логинить заново
                     case 1:
                         console.log('1');
@@ -465,68 +381,23 @@ if (bearer) {
     //     }
     // });
 
-    // console.log('------------перед if------------');
-
 } else {
     document.location.href = '/login.html';
 }
 
 
-$(document).ready(function () {
-
-    /**/
-    // register the handler (чтобы курсор не прыгал)
-    // document.getElementById('main-input').addEventListener('keydown', getInputHistoryHandler, false);
-    /**/
-
-
-    /**/
-    // document.getElementById('main-input').addEventListener('keydown', handler, false);
-    // document.getElementById('main-input').addEventListener('keypress', handler, false);
-    /**/
-
-
-    $(document).bind('copy', function () {
-        // var text = window.getSelection().toString().replace(/[\n\r]+/g, '');
-        var text = window.getSelection().toString();
-        copyToClipboard(text);
-    });
-
-    // function copyToClipboard(text) {
-    //
-    //     console.log("text");
-    //     console.log(text);
-    //
-    //     var textarea = document.createElement("textarea");
-    //     // textarea.textContent = text;
-    //
-    //     /**/
-    //     console.log("copyToClipboard");
-    //     textarea.innerHTML = text;
-    //     /**/
-    //     textarea.style.position = "fixed";
-    //     document.body.appendChild(textarea);
-    //     textarea.select();
-    //     try {
-    //         return document.execCommand("cut");
-    //     } catch (ex) {
-    //         console.warn("Copy to clipboard failed.", ex);
-    //         return false;
-    //     } finally {
-    //         document.body.removeChild(textarea);
-    //     }
-    // }
+document.addEventListener("DOMContentLoaded", function (event) {
 
     /**/
     let card = document.getElementsByTagName('body')[0];
 
-    //todo есть дублирование этого селекта.
-    let input = document.getElementById("main-input");
+    //трюк для копирования текста с экрана
+    inputElement = document.getElementById("main-input");
     card.onmousedown = function (e) {
-        input.removeAttribute('onblur');
+        inputElement.removeAttribute('onblur');
     };
     card.onmouseup = function (e) {
-        input.setAttribute('onblur', input.focus());
+        inputElement.setAttribute('onblur', inputElement.focus());
     };
     /**/
 
@@ -573,31 +444,13 @@ $(document).on("click", "#send-main", function (event) {
     let message = {
         user: user,
     };
-
     let values = ['wwwww', 'asdasdasd'];
-
     $.ajax({
         url: "http://mud-back/userinput",
         type: "post",
-        // data   : values,
-        // data   : {info: values},
-        // data   : {values},
         data: {'a': 'wwwww', 'b': 'asdasdasd'},
         success: function (response) {
-
-            // You will get response from your PHP page (what you echo or print)
-
             console.log(response);
-
-            // $('#panel-body').find('.panel-body').append('Adding more content here :)');
-
-            // $('#main-panel').append('Adding more content here :)' + "<br>");
-
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
-            // $('#main-panel-text').append('Adding more content here :)' + "<br>");
-
 
             $('#main-panel-text div').append('Adding more content here :)' + "<br>");
             $('#main-panel-text div').append('Adding more content here :)' + "<br>");
