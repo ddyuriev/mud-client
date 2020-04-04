@@ -92,11 +92,16 @@ function newWebSocketConnection(user) {
     // websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email);
     // websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email);
     // websocket = new WebSocket("ws://192.168.215.29:8000/?user=" + user.email);
-    if (user.at_home) {
-        websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email + "&color=" + user.color_scheme);
-    } else {
-        websocket = new WebSocket("ws://192.168.215.37:8000/?user=" + user.email + "&color=" + user.color_scheme);
-    }
+
+    //2020.04.04
+    // if (user.at_home) {
+    //     websocket = new WebSocket("ws://127.0.0.1:8000/?user=" + user.email + "&color=" + user.color_scheme);
+    // } else {
+    //     websocket = new WebSocket("ws://192.168.215.37:8000/?user=" + user.email + "&color=" + user.color_scheme);
+    // }
+
+    websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email + "&color=" + user.color_scheme);
+
 
     websocket.onopen = function (ev) {
         console.log('*!*!*!*!*!*!*!onopen, Вы подключены!');
@@ -150,6 +155,9 @@ function newWebSocketConnection(user) {
                 // document.getElementById('main-panel-text-finally').innerHTML = msg[messageKey] + innerHTML;
                 // document.getElementById('main-panel-text-finally-span').innerHTML = msg[messageKey] + innerHTML;
                 // document.getElementById('main-panel-text-finally-span').innerHTML = innerHTML + msg[messageKey];
+                document.getElementById('main-text').innerHTML = innerHTML + msg[messageKey];
+
+            case 'service':
                 document.getElementById('main-text').innerHTML = innerHTML + msg[messageKey];
 
                 break;
