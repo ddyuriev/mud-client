@@ -2,7 +2,7 @@
 
 function ajaxLogin(email, password) {
     $.ajax({
-        url: "http://mud-back/api/login",
+        url: `http://${appConfig.mudBack}/api/login`,
         type: "POST",
         data: {
             'email': email,
@@ -14,9 +14,6 @@ function ajaxLogin(email, password) {
             if(response.token){
                 localStorage.setItem("token", response.token);
                 document.location.href = '/';
-                /**/
-                // document.location.href = '/test.html';
-                /**/
             }
 
         },

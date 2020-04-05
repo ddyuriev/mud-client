@@ -3,7 +3,7 @@ const INPUT_HISTORY_DOWN = -1;
 const INPUT_HISTORY_LENGTH = 7;
 
 let bearer = localStorage.getItem("token");
-let url = 'http://mud-back/api/profile?token=';
+let url = `http://${appConfig.mudBack}/api/profile?token=`;
 let user = {};
 let xhrGetProfileResult = 0;
 let secondIteration = 0;
@@ -100,7 +100,11 @@ function newWebSocketConnection(user) {
     //     websocket = new WebSocket("ws://192.168.215.37:8000/?user=" + user.email + "&color=" + user.color_scheme);
     // }
 
-    websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email + "&color=" + user.color_scheme);
+    // websocket = new WebSocket("ws://192.168.0.104:8000/?user=" + user.email + "&color=" + user.color_scheme);
+
+    //2020.04.05
+    // websocket = new WebSocket(`ws://${user.websocket_host}:8000/?user=` + user.email + "&color=" + user.color_scheme);
+    websocket = new WebSocket(`ws://${user.websocket_host}:8000/?user=${user.email}&color=${user.color_scheme}`);
 
 
     websocket.onopen = function (ev) {
@@ -454,7 +458,8 @@ $(document).on("click", "#send-main", function (event) {
     };
     let values = ['wwwww', 'asdasdasd'];
     $.ajax({
-        url: "http://mud-back/userinput",
+        // url: "http://mud-back/userinput",
+        url: `http://${appConfig.mudBack}/userinput`,
         type: "post",
         data: {'a': 'wwwww', 'b': 'asdasdasd'},
         success: function (response) {
