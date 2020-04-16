@@ -1,0 +1,59 @@
+function ajaxLogin1(email, password) {
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    fetch(`http://${appConfig.mudBack}/api/login`, {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                console.log('redirect');
+                // document.location.href = '/';
+            }
+        });
+
+    console.log('ajaxLogin1');
+}
+
+ajaxLogin1
+login.js:49 {token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJod…hYSJ9.KGLEkcmCcXzbybKiV-IfsBQK_385pymZRqYYTzyW5Ec", token_type: "bearer", expires_in: 6000}
+login.js:53 redirect
+
+async function ajaxLogin2(email, password) {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    const response = await fetch(`http://${appConfig.mudBack}/api/login`, {
+        method: 'POST',
+        body: formData,
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                console.log('redirect');
+                // document.location.href = '/';
+            }
+        });
+    console.log('ajaxLogin2');
+}
+
+
+{token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJod…hYSJ9.9SCLnvvvNtBjyPdrIyIsucbAjMR3QdOwhddOcgfFi7s", token_type: "bearer", expires_in: 6000}
+login.js:87 redirect
+login.js:98 ajaxLogin2
+
+Вот такая разница.

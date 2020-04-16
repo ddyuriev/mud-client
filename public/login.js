@@ -11,7 +11,7 @@ function ajaxLogin(email, password) {
         success: function (response) {
             console.log('login:');
             console.log(response);
-            if(response.token){
+            if (response.token) {
                 localStorage.setItem("token", response.token);
                 document.location.href = '/';
             }
@@ -20,12 +20,65 @@ function ajaxLogin(email, password) {
     });
 }
 
+/**/
+//эту оставить
+function ajaxLogin1(email, password) {
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    fetch(`http://${appConfig.mudBack}/api/login`, {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                console.log('redirect');
+                // document.location.href = '/';
+            }
+        });
+
+    console.log('ajaxLogin1');
+}
+
+async function ajaxLogin2(email, password) {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    const response = await fetch(`http://${appConfig.mudBack}/api/login`, {
+        method: 'POST',
+        body: formData,
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                console.log('redirect');
+                // document.location.href = '/';
+            }
+        });
+    console.log('ajaxLogin2');
+}
+
+/**/
+
 function validateEmail(email) {
     let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function (event) {
 
     $(document).on("click", "#login-button", function (event) {
         let userEmail = $("#user_email").val();
@@ -51,7 +104,7 @@ $(document).ready(function () {
         }
 
         // console.log("ajax");
-        ajaxLogin(userEmail, userPassword)
+        ajaxLogin1(userEmail, userPassword)
     });
 
 });

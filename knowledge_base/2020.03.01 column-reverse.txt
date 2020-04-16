@@ -1,6 +1,6 @@
-https://ru.stackoverflow.com/questions/1089438/Выводить-новые-элементы-внизу-списка
+https://ru.stackoverflow.com/questions/1089438/Р’С‹РІРѕРґРёС‚СЊ-РЅРѕРІС‹Рµ-СЌР»РµРјРµРЅС‚С‹-РІРЅРёР·Сѓ-СЃРїРёСЃРєР°
 
-всего лишь нужно было изменить порядок сложения))
+РІСЃРµРіРѕ Р»РёС€СЊ РЅСѓР¶РЅРѕ Р±С‹Р»Рѕ РёР·РјРµРЅРёС‚СЊ РїРѕСЂСЏРґРѕРє СЃР»РѕР¶РµРЅРёСЏ))
 
 
 document.getElementById('main-panel-text-finally').innerHTML = innerHTML + newEl;
