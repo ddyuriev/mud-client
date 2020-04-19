@@ -41,7 +41,7 @@ function ajaxLogin1(email, password) {
             if (data.token) {
                 localStorage.setItem("token", data.token);
                 console.log('redirect');
-                // document.location.href = '/';
+                document.location.href = '/';
             }
         });
 
